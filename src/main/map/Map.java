@@ -1,4 +1,4 @@
-package map;
+package main.map;
 
 public class Map {
 

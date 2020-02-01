@@ -1,6 +1,7 @@
-package Stacks;
+package main.Stacks;
 
-import map.Map;
+import main.Player;
+import main.map.Map;
 
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class Main {
 		// TODO Auto-generated constructor stub
 		map = new Map();
 		enemy = new Enemy();
-		player = new Player();
+		player = new Player(null, 0, 0, 0, 0);
 	}
 
 	public static void main(String[] args) {
@@ -65,14 +66,14 @@ public class Main {
 				
 				showCombatOptions();
 				
-//				switch(userInput)
-//				{
-//				case "1": player.attack();attackLimit++; break;
-//				case "2": player.specialAttack(); specialAttackLimit++; break;
-//				case "3": player.healHP(); healHPLimit++; break;
-//				case "4": player.healMP(); healMPLimit++; break;
-//				case "0": player.flee();break;
-//				}
+				switch(userInput)
+				{
+				case "1": player.attack();attackLimit++; break;
+				case "2": player.specialAttack(); specialAttackLimit++; break;
+				case "3": player.healHP(); healHPLimit++; break;
+				case "4": player.healMP(); healMPLimit++; break;
+				case "0": player.flee();break;
+				}
 				
 			}
 			

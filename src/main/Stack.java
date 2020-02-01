@@ -1,3 +1,5 @@
+package main;
+
 /**
  * Stack class that contains a list.
  * 

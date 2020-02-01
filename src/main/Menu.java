@@ -1,8 +1,5 @@
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.InputMismatchException;
+package main;
+
 import java.util.Scanner;
 
 /** 
@@ -20,7 +17,8 @@ public class Menu
 	//private String name;
 	private int count;
 	private boolean end;
-	boolean player1;
+	//boolean player1;
+    
 	
 	/**  
 	 *  */
@@ -35,7 +33,8 @@ public class Menu
 		//name = "";
 		count = 0;
 		end = false;
-		player1 = true;
+      
+
 	}
 	
 
@@ -85,22 +84,6 @@ public class Menu
 		this.gameName = gameName;
 	}
 
-
-	/** Getter for player1 */
-	
-	public boolean isPlayer1() 
-	{
-		return player1;
-	}
-	
-	
-	/** Setter for player1 */
-	
-	public void setPlayer1(boolean player1) 
-	{
-		this.player1 = player1;
-	}
-
 	/**
 	 * This method welcomes the user when the program is started by using a counter ('count') that is only zero the first time this method is used.
 	 * This method then gives a short explanation of the game and opens the main menu. 
@@ -113,9 +96,11 @@ public class Menu
 			
 			System.out.println("Hello. This is Hide&Seek&GetLostInAMaze!" );
 			
-			System.out.print("\t \n Would you like to... \n"
+			System.out.println("\t \n Would you like to... \n"
 					+ "\n ... start a new game? Please enter number 1."
 					+ "\n ... load an old game? Please enter number 2.");
+					
+            System.out.print("\nWhich number do you chose? Number = ");
 			
 			Scanner s1 = new Scanner(System.in);
 			String choice = s1.nextLine();
@@ -128,8 +113,8 @@ public class Menu
 				switch(choice)
 				{
 					case "1":
-						// do sth
-						break;
+						return;
+						//break;
 		
 					case "2":	
 						selectGame();
@@ -141,7 +126,7 @@ public class Menu
 					return;
 				}	
 			}
-			while(notAValidChoice == true);
+			while(notAValidChoice);
 		}
 		
 		else 
@@ -155,43 +140,25 @@ public class Menu
 			
 			boolean notAValidName = false;
 			
-			do
+			do 
 			{
-				System.out.print("\nWhat is the name of your game? \n" );
-				System.out.print("Name of the game: " );
-				
+				System.out.print("\nWhat is the name of your game? \n");
+				System.out.print("Name of the game: ");
+
 				Scanner s1 = new Scanner(System.in);
 				gameName = s1.nextLine();
-				// look for file, if doesn't exist -> notAValidName = true;
-			
-				System.out.println("\nThanks. ");
-				String name1 = getNamePlayer1();
-				String name2 = getNamePlayer2();
-				System.out.println("Are you " + name1 + " or " + name2 +"?" );
-				String inputName = s1.nextLine();
-			
-				switch(inputName)
+				
+				
+				if(!game.checkIfFileExists(gameName))
 				{
-			
-					case name1:
-						player1 = true;
-						break;
-				
-					case name2:
-						player1 = false;
-						break;
-				
-					default:
-						System.out.print("\nError. This player does not participate in the game. Please try again. ");
-						notAValidName = true;
-						break;;
+					notAValidName = true;
 				}
 				
-			}
-			while(notAValidName == true);
+			} while (notAValidName);
 			
+			System.out.println("\nThanks. ");
 		
-			if(player1 == true)
+			if(game.isPlayer1())
 			{
 				System.out.print("\n" + "Hello " + namePlayer1 + "!");
 			}
@@ -212,80 +179,79 @@ public class Menu
 	{
 		do
 		{
-			
-			
 			System.out.print("\n Main Menu:");
 			System.out.print("\t \n Would you like to... \n");
+            System.out.print("\n ... play the game? Please enter number 1.");
 			
-			if (player1 == true)
+			if (game.isPlayer1())
 			{
-				System.out.print("\n ... change to player 1? Please enter number 1.");
+				System.out.print("\n ... change to player 2? Please enter number 2.");
 			}
 			else
 			{
-				System.out.print("\n ... change to player 2? Please enter number 1.");
+				System.out.print("\n ... change to player 1? Please enter number 2.");
 			}
 			
 			
-			System.out.print("\n ... get some help with the rules? Please enter number 2.");
-			System.out.print("\n ... exit the game? Please enter number 3. \n"
+			System.out.print("\n ... get some help with the rules? Please enter number 3.");
+			System.out.print("\n ... exit the game? Please enter number 4. \n"
 					+ "\n Which number do you choose? Number = ");
 
 			Scanner s2 = new Scanner(System.in);
 			String decision = s2.nextLine();
 			
 			
-			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3"));
+			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3") && !decision.equals("4"))
 			{
-				System.out.print("\nError. Please enter an integer between 1-3!"
+				System.out.print("\nError. Please enter an integer between 1-4!"
 				+ "\n" + "\nWhich number do you chose? Number = ");
 				decision = s2.nextLine();
 			}
-			
-			chosenOption:
-			switch(decision)
-			{
 
-			case "1":
-				
-	
-				if(player1 == true)
-				{
-					System.out.print("\n Welcome back " + namePlayer1 + "!" + "\n");
-					game.playGame();
+			switch (decision) {
+
+				case "1":
+
+					System.out.print("\n Welcome back " + (game.isPlayer1() ? namePlayer1 : namePlayer2) + "!" + "\n");
+					game.playGame(s2);
 					gameMenu();
-				}
-				
-				else
-				{
-					System.out.print("\n Welcome back " + namePlayer2 + "!" + "\n");
-					game.playGame();
-					gameMenu();
-				}
-				break;
-				
-			case "2": //help menu
-				System.out.print("\nThis is Hide&Seek&GetLostInAMaze! These are the rules: xxx " );
-				
-				break;
-				
-			case "3":
-				end = true;
-				System.out.print("\n Thank you for playing Hide&Seek&GetLostInAMaze. We hope you have enjoyed it. \n Goodybe. ");
-				System.out.println();
-				System.out.println();
-				System.exit(0);
-				break;
-				
-			default:
-				System.out.print("\nError. Please enter an integer between 1-3!"
-						+ "\n" + "\nWhich number do you chose? Number = ");
-				String decision2 = s2.nextLine();
-				decision = decision2; 
-				
+					break;
+
+                case "2":
+
+                    if(game.isPlayer1())
+                    {
+                        game.setPlayer1(false);
+                    }
+			
+                    else
+                    {
+						game.setPlayer1(true);
+                    }
+
+                    break;
+
+				case "3": //help menu
+					System.out.print("\nThis is Hide&Seek&GetLostInAMaze! These are the rules: xxx ");
+
+					break;
+
+				case "4":
+					end = true;
+					System.out.print("\n Thank you for playing Hide&Seek&GetLostInAMaze. We hope you have enjoyed it. \n Goodybe. ");
+					System.out.println();
+					System.out.println();
+					System.exit(0);
+					break;
+
+				default:
+					System.out.print("\nError. Please enter an integer between 1-3!"
+							+ "\n" + "\nWhich number do you chose? Number = ");
+					decision = s2.nextLine();
+
 			}
 		}
-	    while(end == false);
+	    while(!end);
 	}
 		
 
@@ -309,7 +275,7 @@ public class Menu
 					+ "\n ... return to the game? Please enter number 1."
 					+ "\n ... display your current score? Please enter number 2."
 					+ "\n ... save? Please enter number 2."
-					+ "\n ... go to main menu=);
+					+ "\n ... go to main menu? Please enter number 3.");
 						
 		
 
@@ -326,14 +292,15 @@ public class Menu
 			{
 				
 				case "1":
-					
+					game.playGame(s2);
 					
 					break;
 				
-				
+				case "3":
+					return;
 					
 				case "4":
-					game.saveGame(playerVComputer);
+//					game.saveGame(playerVComputer);
 					
 					break;
 					
@@ -348,11 +315,13 @@ public class Menu
 				++ count ; 
 				welcome();	
 			 }
-			 while (end == false);
-	} 
+			 while (!end);
+	}
 }
 		
 		
 		
 		
 	
+
+ 

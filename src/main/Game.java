@@ -1,4 +1,6 @@
-import map.Map;
+package main;
+
+import main.map.Map;
 
 import java.io.File;
 import java.util.Scanner;
