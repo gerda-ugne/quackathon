@@ -62,7 +62,7 @@ public class Map {
 	}
 
 	public char getField(int x, int y) throws IndexOutOfBoundsException {
-		return map[x][y];
+		return map[y][x];
 	}
 
 	public void setField(int x, int y, char type) throws IndexOutOfBoundsException {

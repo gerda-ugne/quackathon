@@ -20,8 +20,8 @@ public class Game {
 
 	public Game() {
 		player1X = 0;
-		player1Y = Map.MAP_SIZE;
-		player2X = Map.MAP_SIZE;
+		player1Y = Map.MAP_SIZE - 1;
+		player2X = Map.MAP_SIZE - 1;
 		player2Y = 0;
 		map = new Map();
 		isPlayer1 = true;
@@ -100,6 +100,7 @@ public class Game {
 			System.out.println("You cannot go into that direction.");
 		}
 		movePlayer(direction);
+		map.displayMap();
 	}
 
 	private char getDirection(Scanner in) {
