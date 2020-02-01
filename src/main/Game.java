@@ -2,10 +2,10 @@ package main;
 
 import main.map.Map;
 
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements Serializable {
 
 	private int player1X;
 	private int player1Y;
@@ -146,18 +146,8 @@ public class Game {
 		}
 	}
 
-	public boolean checkIfFileExists (String fileName)
-	{
-		File firstFile = new File(fileName);
-		boolean exists = firstFile.exists();
-		boolean readable = firstFile.canRead();
-		boolean yepOrNope = false;
 
-		if (exists && readable)
-		{
-			yepOrNope = true;
-		}
 
-		return yepOrNope;
-	}
+	// please make a fields "inputName" & "outputName" (String) & generate getters&setters
+
 }

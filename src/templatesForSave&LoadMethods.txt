@@ -1,0 +1,157 @@
+
+
+
+	// please make a fields "inputName" & "outputName" (String) & generate getters&setters
+	
+	
+	public void saveGame(//boolean isPlayer1)
+			)
+	{
+		System.out.print("\n");
+		
+		FileOutputStream outputStream = null;
+	    PrintWriter printWriter = null;
+	        
+	        try
+	        {
+	        	Scanner s2 = new Scanner(System.in);
+				System.out.print("\nPlease enter a name of this game.\nGame name: ");
+				setInputName(s2.nextLine());
+				
+	            outputStream = new FileOutputStream(inputName + ".txt");
+	            printWriter = new PrintWriter(outputStream);   
+	            
+	            System.out.println();
+	           
+	            //prints the grid with the compuer's fleet (the one that the user can't see!)
+	            
+	          //  printWriter.print(isPlayer1);
+	            printWriter.print("\n");
+	            
+	          
+	           char[][] map = //get it from where it is
+	            
+	           for(int i=0; i<map.length;i++)
+	   			{
+	   				for(int j=0; j<map[i].length;j++)
+	   				{
+	   					printWriter.print(map[i][j] + " ");
+	   				}
+	   				System.out.println();
+	   			}
+	    			
+	    			printWriter.print(" \n");
+	    		}	
+	            
+	        	// print other stuff: inventory, score, etc
+	   
+	        
+	        catch (IOException e)
+	        {
+	            System.out.println("Error in file write: " + e + "!");
+	        }
+	        
+	        finally
+	        {
+	        	 if (printWriter != null)
+	        	 {
+	        	      printWriter.close();
+	        	 }
+	        }  
+	}
+
+
+
+
+
+
+
+
+public int loadGame()
+	{
+		//boolean player1or2 = false;
+		boolean fileExists = true;
+		int tryThreeTimes = 0;
+		
+		FileReader fileReader = null;
+		BufferedReader bufferedReader = null;
+		String nextLine;
+		
+		
+		try
+		 {
+			Scanner s2 = new Scanner(System.in);
+			System.out.print("\nPlease enter a name for your game. Game name: ");
+			setOutputName(s2.nextLine()); 
+			
+			fileExists = checkIfFileExists(outputName + ".txt");
+			
+			while((fileExists == false) && (tryThreeTimes < 3))
+			{
+				System.out.print("\nStrange, we could not find a game with that name.");
+				System.out.print("\nPlease a the name for your game. Game name: ");
+				setOutputName(s2.nextLine()); 
+				
+				fileExists = checkIfFileExists(outputName + ".txt");
+				tryThreeTimes++;
+				
+				if((tryThreeTimes == 2) && (fileExists == false))
+				{
+					System.out.print("\nStrange, we could not find a game with that name.");
+					System.out.print("\nWe will now take you back to the main menu. ");
+					System.out.println();
+					return 2;
+				}
+			}
+		
+			fileReader = new FileReader(outputName + ".txt");
+			bufferedReader = new BufferedReader(fileReader); 
+
+			nextLine = bufferedReader.readLine();
+			//isPlayer1 = Boolean.parseBoolean(nextLine);
+
+			
+			
+			char[][] map = //get map from somewhere
+			
+			int oneSet = 0;
+			while (oneSet<10)
+			{
+				nextLine = bufferedReader.readLine();
+				String[] j = nextLine.split("  ", 10);
+			
+				for (int k = 0; k<map[oneSet].length;k++)
+				{			
+					oldGame[oneSet][k] = j[k];
+				}
+				
+				oneSet++;
+			}
+			
+			//methods to set map to map
+			// methods to set all the rest
+			
+	
+		}
+		 
+		catch (IOException e)
+		{
+		 	System.out.println("Sorry, an error occurred."+ " \n");
+		}
+		
+		finally
+		{	
+			try
+			{
+				if (bufferedReader != null)
+				{
+					bufferedReader.close();	
+				}
+			}
+			
+			catch (IOException e)
+			{
+			 	System.out.println("Sorry, an error occurred.");
+			}	
+		}
+	}
