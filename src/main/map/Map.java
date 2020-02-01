@@ -1,17 +1,15 @@
 package main.map;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class Map implements Serializable {
 
-	public static final char CAN_GO_CHAR = '.';
-	public static final char OBSTACLE_CHAR = 'O';
-	public static final char PLAYER_1_CHAR = '1';
-	public static final char PLAYER_2_CHAR = '2';
-	
-	private char[][] map;
+	private Field[][] map;
 	public final static int MAP_SIZE = 10;
-	
+
 
 	public Map() {
 		
@@ -58,19 +56,46 @@ public class Map implements Serializable {
 		
 	}
 	
-	public void generateMap()
-	{
-		map = new char[MAP_SIZE][MAP_SIZE];
-		for (int i = 0; i < MAP_SIZE; i++) {
+	public void generateMap() {
+		Random rn = new Random();
 
+		ArrayList<ArrayList<Field>> blocked = new ArrayList<>(MAP_SIZE);
+		for (int i = 0; i < MAP_SIZE; i++) {
+			ArrayList<Field> row = new ArrayList<Field>(MAP_SIZE);
+			for (int j = 0; j < MAP_SIZE; j++) {
+				row.add(new Field(i, j));
+			}
+			blocked.add(row);
+		}
+
+		ArrayList<ArrayList<Field>> unblocked = new ArrayList<>();
+
+		Field start = blocked.get(0).get(MAP_SIZE - 1);
+		Field end = blocked.get(MAP_SIZE - 1).get(0);
+
+		start.setCharacter(Field.CAN_GO_CHAR);
+		end.setCharacter(Field.CAN_GO_CHAR);
+
+		unblocked.add(new ArrayList<>(Collections.singletonList(start)));
+		unblocked.add(new ArrayList<>(Collections.singletonList(end)));
+
+		while (unblocked.size() > 1) {
+			int row = rn.nextInt(blocked.size());
+			int col = rn.nextInt(blocked.get(row).size());
+			Field newUnblocked = blocked.get(row).get(col);
+			map[newUnblocked.getX()][newUnblocked.getY()] = newUnblocked;
+
+			if (map[row][col - 1].canMove()) {
+
+			}
 		}
 	}
 
 	public char getField(int x, int y) throws IndexOutOfBoundsException {
-		return map[y][x];
+		return map[y][x].getCharacter();
 	}
 
 	public void setField(int x, int y, char type) throws IndexOutOfBoundsException {
-		map[y][x] = type;
+		map[y][x].setCharacter(type);
 	}
 }

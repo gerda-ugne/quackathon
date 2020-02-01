@@ -1,5 +1,6 @@
 package main;
 
+import main.map.Field;
 import main.map.Map;
 
 import java.io.*;
@@ -57,28 +58,28 @@ public class Game implements Serializable {
 				direction = getDirection(in);
 				switch (direction) {
 					case 't':
-						if (map.getField(playerX, playerY - 1) == Map.CAN_GO_CHAR) {
+						if (map.getField(playerX, playerY - 1) == Field.CAN_GO_CHAR) {
 							valid = true;
 							continue;
 						} else {
 							break;
 						}
 					case 'r':
-						if (map.getField(playerX + 1, playerY) == Map.CAN_GO_CHAR) {
+						if (map.getField(playerX + 1, playerY) == Field.CAN_GO_CHAR) {
 							valid = true;
 							continue;
 						} else {
 							break;
 						}
 					case 'b':
-						if (map.getField(playerX, playerY + 1) == Map.CAN_GO_CHAR) {
+						if (map.getField(playerX, playerY + 1) == Field.CAN_GO_CHAR) {
 							valid = true;
 							continue;
 						} else {
 							break;
 						}
 					case 'l':
-						if (map.getField(playerX - 1, playerY) == Map.CAN_GO_CHAR) {
+						if (map.getField(playerX - 1, playerY) == Field.CAN_GO_CHAR) {
 							valid = true;
 							continue;
 						} else {
@@ -122,21 +123,21 @@ public class Game implements Serializable {
 		int playerY = isPlayer1 ? player1Y : player2Y;
 		switch (direction) {
 			case 't':
-				map.setField(playerX, playerY--, Map.CAN_GO_CHAR);
+				map.setField(playerX, playerY--, Field.CAN_GO_CHAR);
 				break;
 			case 'r':
-				map.setField(playerX++, playerY, Map.CAN_GO_CHAR);
+				map.setField(playerX++, playerY, Field.CAN_GO_CHAR);
 				break;
 			case 'b':
-				map.setField(playerX, playerY++, Map.CAN_GO_CHAR);
+				map.setField(playerX, playerY++, Field.CAN_GO_CHAR);
 				break;
 			case 'l':
-				map.setField(playerX--, playerY, Map.CAN_GO_CHAR);
+				map.setField(playerX--, playerY, Field.CAN_GO_CHAR);
 				break;
 			default:
 				return;
 		}
-		map.setField(playerX, playerY, isPlayer1 ? Map.PLAYER_1_CHAR : Map.PLAYER_2_CHAR);
+		map.setField(playerX, playerY, isPlayer1 ? Field.PLAYER_1_CHAR : Field.PLAYER_2_CHAR);
 		if (isPlayer1) {
 			player1X = playerX;
 			player1Y = playerY;

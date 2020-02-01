@@ -2,50 +2,39 @@ package main.map;
 
 public class Field {
 
-    private boolean right;
-    private boolean bottom;
-    private boolean left;
-    private boolean top;
+    public static final char CAN_GO_CHAR = '.';
+    public static final char OBSTACLE_CHAR = 'O';
+    public static final char PLAYER_1_CHAR = '1';
+    public static final char PLAYER_2_CHAR = '2';
+
+    private int x;
+    private int y;
+    private boolean canMove;
     private boolean hasItem;
+    private char character;
 
-    public Field() {
-        right = false;
-        bottom = false;
-        left = false;
-        top = false;
+    public Field(int x, int y) {
+        this.x = x;
+        this.y = y;
+        canMove = false;
         hasItem = false;
+        character = OBSTACLE_CHAR;
     }
 
-    public boolean isRight() {
-        return right;
+    public int getX() {
+        return x;
     }
 
-    public void setRight(boolean right) {
-        this.right = right;
+    public int getY() {
+        return y;
     }
 
-    public boolean isBottom() {
-        return bottom;
+    public boolean canMove() {
+        return canMove;
     }
 
-    public void setBottom(boolean bottom) {
-        this.bottom = bottom;
-    }
-
-    public boolean isLeft() {
-        return left;
-    }
-
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
-
-    public boolean isTop() {
-        return top;
-    }
-
-    public void setTop(boolean top) {
-        this.top = top;
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
     }
 
     public boolean hasItem() {
@@ -54,5 +43,13 @@ public class Field {
 
     public void setHasItem(boolean hasItem) {
         this.hasItem = hasItem;
+    }
+
+    public char getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(char character) {
+        this.character = character;
     }
 }
