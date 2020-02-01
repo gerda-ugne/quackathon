@@ -90,7 +90,7 @@ public class Main {
 
 				} while (retry=true);
 			}
-			
+
 			//Player choices are executed, damage recorded
 			playerDamage = player.execute(recordedUserMoves);
 
@@ -104,7 +104,7 @@ public class Main {
 				System.out.println("Human has their turn!");
 				int random = (int )(Math.random() * 4 + 1);
 				enemyInput = Integer.toString(random);
-				
+
 				switch(enemyInput)
 				{
 				case "1": recordedEnemyMoves = recordedEnemyMoves + "1";break;
@@ -112,19 +112,19 @@ public class Main {
 				case "3": recordedEnemyMoves = recordedEnemyMoves + "3"; break;
 				case "4": recordedEnemyMoves = recordedEnemyMoves + "4"; break;
 				}
-				
+
 				//Separating input with a space
 				recordedEnemyMoves = recordedEnemyMoves + " ";
 
 			}
-			
+
 			//Enemy choices are executed, damage recorded
 			enemyDamage = enemy.execute(recordedEnemyMoves);
 
 			//Player's health is deduced after enemy moves
 			player.setHealth(player.getHealth()- enemyDamage);
 
-			
+
 		} while(enemy.isEnemyAlive() == false || player.isPlayerAlive() == false);
 
 

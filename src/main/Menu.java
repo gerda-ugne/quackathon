@@ -141,9 +141,9 @@ public class Menu
 	{
 			
 			boolean notAValidName = false;
-			
+
 			loadGame();
-			
+
 			System.out.println("\nThanks. ");
 		
 			if(game.isPlayer1())
@@ -179,7 +179,7 @@ public class Menu
 			{
 				System.out.print("\n ... change to player 1? Please enter number 2.");
 			}
-			
+
 			
 			System.out.print("\n ... get some help with the rules? Please enter number 3.");
 			System.out.print("\n ... exit the game? Please enter number 4. \n"
@@ -281,7 +281,7 @@ public class Menu
 				
 				case "1":
 					game.playGame(s2);
-					
+
 					break;
 
 				case "4":
