@@ -2,13 +2,13 @@ package map;
 
 public class Map {
 
-	private static final char CAN_GO_CHAR = '.';
-	private static final char OBSTACLE_CHAR = 'O';
-	private static final char PLAYER_1_CHAR = '1';
-	private static final char PLAYER_2_CHAR = '2';
+	public static final char CAN_GO_CHAR = '.';
+	public static final char OBSTACLE_CHAR = 'O';
+	public static final char PLAYER_1_CHAR = '1';
+	public static final char PLAYER_2_CHAR = '2';
 	
 	private char[][] map;
-	private final static int MAP_SIZE = 10;
+	public final static int MAP_SIZE = 10;
 	
 
 	public Map() {
@@ -60,8 +60,12 @@ public class Map {
 	{
 		
 	}
-		
-		
-	
 
+	public char getField(int x, int y) throws IndexOutOfBoundsException {
+		return map[y][x];
+	}
+
+	public void setField(int x, int y, char type) throws IndexOutOfBoundsException {
+		map[y][x] = type;
+	}
 }
