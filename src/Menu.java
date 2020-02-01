@@ -100,7 +100,7 @@ public class Menu
 			
 			System.out.println("Hello. This is Hide&Seek&GetLostInAMaze!" );
 			
-			System.out.print("\t \n Would you like to... \n"
+			System.out.println("\t \n Would you like to... \n"
 					+ "\n ... start a new game? Please enter number 1."
 					+ "\n ... load an old game? Please enter number 2.");
 					
@@ -143,17 +143,24 @@ public class Menu
 	{
 			
 			boolean notAValidName = false;
-
-			do {
+			
+			do 
+			{
 				System.out.print("\nWhat is the name of your game? \n");
 				System.out.print("Name of the game: ");
 
 				Scanner s1 = new Scanner(System.in);
 				gameName = s1.nextLine();
-				// look for file, if doesn't exist -> notAValidName = true;
-
-				System.out.println("\nThanks. ");
-			} while (notAValidName);
+				
+				
+				if(!game.checkIfFileExists(gameName))
+				{
+					notAValidName = true;
+				}
+				
+			} while (notAValidName == true);
+			
+			System.out.println("\nThanks. ");
 		
 			if(game.isPlayer1())
 			{
@@ -210,7 +217,7 @@ public class Menu
 				case "1":
 
 					System.out.print("\n Welcome back " + (game.isPlayer1() ? namePlayer1 : namePlayer2) + "!" + "\n");
-					game.playGame(s2);
+					game.playGame();
 					gameMenu();
 					break;
 
@@ -218,12 +225,12 @@ public class Menu
 
                     if(game.isPlayer1())
                     {
-                        game.setPlayer1(false);
+                        game.setPlayer1 = false;
                     }
 			
                     else
                     {
-                        game.setPlayer1(true);
+                        game.setPlayer1 = true;
                     }
 
                     break;
@@ -294,8 +301,7 @@ public class Menu
 					break;
 				
 				case "3":
-//					return
-					break;
+					return;
 					
 				case "4":
 //					game.saveGame(playerVComputer);
