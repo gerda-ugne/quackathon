@@ -1,3 +1,7 @@
+package Stacks;
+
+import map.Map;
+
 import java.util.Scanner;
 
 public class Main {

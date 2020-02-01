@@ -1,10 +1,13 @@
+package Stacks;
+
+import java.util.Stack;
 
 public class Enemy {
 
 	private int health;
 	private int mana;
 
-	
+
 	private Stack actionQueue;
 	
 	public Enemy() {
