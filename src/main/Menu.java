@@ -1,8 +1,6 @@
+package main;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -100,7 +98,7 @@ public class Menu
 			
 			System.out.println("Hello. This is Hide&Seek&GetLostInAMaze!" );
 			
-			System.out.print("\t \n Would you like to... \n"
+			System.out.println("\t \n Would you like to... \n"
 					+ "\n ... start a new game? Please enter number 1."
 					+ "\n ... load an old game? Please enter number 2.");
 					
@@ -144,16 +142,9 @@ public class Menu
 			
 			boolean notAValidName = false;
 
-			do {
-				System.out.print("\nWhat is the name of your game? \n");
-				System.out.print("Name of the game: ");
+			loadGame();
 
-				Scanner s1 = new Scanner(System.in);
-				gameName = s1.nextLine();
-				// look for file, if doesn't exist -> notAValidName = true;
-
-				System.out.println("\nThanks. ");
-			} while (notAValidName);
+			System.out.println("\nThanks. ");
 		
 			if(game.isPlayer1())
 			{
@@ -182,13 +173,13 @@ public class Menu
 			
 			if (game.isPlayer1())
 			{
-				System.out.print("\n ... change to player 1? Please enter number 2.");
+				System.out.print("\n ... change to player 2? Please enter number 2.");
 			}
 			else
 			{
-				System.out.print("\n ... change to player 2? Please enter number 2.");
+				System.out.print("\n ... change to player 1? Please enter number 2.");
 			}
-			
+
 			
 			System.out.print("\n ... get some help with the rules? Please enter number 3.");
 			System.out.print("\n ... exit the game? Please enter number 4. \n"
@@ -210,7 +201,7 @@ public class Menu
 				case "1":
 
 					System.out.print("\n Welcome back " + (game.isPlayer1() ? namePlayer1 : namePlayer2) + "!" + "\n");
-					game.playGame();
+					game.playGame(s2);
 					gameMenu();
 					break;
 
@@ -223,7 +214,7 @@ public class Menu
 			
                     else
                     {
-                        game.setPlayer1(true)1;
+						game.setPlayer1(true);
                     }
 
                     break;
@@ -271,8 +262,8 @@ public class Menu
 			System.out.print("\t \n Would you like to... \n"
 					+ "\n ... return to the game? Please enter number 1."
 					+ "\n ... display your current score? Please enter number 2."
-					+ "\n ... save? Please enter number 2."
-					+ "\n ... go to main menu? Please enter number 3.");
+					+ "\n ... save? Please enter number 3."
+					+ "\n ... go to main menu? Please enter number 4.");
 						
 		
 
@@ -289,16 +280,15 @@ public class Menu
 			{
 				
 				case "1":
-					
-					
+					game.playGame(s2);
+
 					break;
-				
-				case "3":
-//					return
-					break;
-					
+
 				case "4":
-//					game.saveGame(playerVComputer);
+					return;
+
+				case "3":
+					saveGame();
 					
 					break;
 					
@@ -312,8 +302,146 @@ public class Menu
 			}	
 				++ count ; 
 				welcome();	
-			 }
-			 while (!end);
+		} while (true);
+	}
+
+	public void saveGame(//boolean isPlayer1)
+	)
+	{
+		System.out.print("\n");
+
+		FileOutputStream outputStream = null;
+		ObjectOutputStream objectWriter = null;
+
+		try
+		{
+			Scanner s2 = new Scanner(System.in);
+			System.out.print("\nPlease enter a name of this game.\nGame name: ");
+			String name = s2.nextLine();
+
+			outputStream = new FileOutputStream(name + ".txt");
+			objectWriter = new ObjectOutputStream(outputStream);
+
+			System.out.println();
+
+			//prints the grid with the compuer's fleet (the one that the user can't see!)
+
+			//  printWriter.print(isPlayer1);
+			objectWriter.writeObject(game);
+		}
+
+		// print other stuff: inventory, score, etc
+
+
+		catch (IOException e)
+		{
+			System.out.println("Error in file write: " + e + "!");
+		}
+
+		finally
+		{
+			if (objectWriter != null)
+			{
+				try {
+					objectWriter.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private void setInputName(String nextLine) {
+
+	}
+
+
+	public void loadGame()
+	{
+		//boolean player1or2 = false;
+		boolean fileExists = true;
+		int tryThreeTimes = 0;
+
+		FileInputStream fileReader = null;
+		ObjectInputStream inputStream = null;
+		String nextLine;
+
+
+		try
+		{
+			Scanner s2 = new Scanner(System.in);
+			System.out.print("\nPlease enter a name for your game. Game name: ");
+			String name = s2.nextLine();
+
+			fileExists = checkIfFileExists(name + ".txt");
+
+			while((!fileExists) && (tryThreeTimes < 3))
+			{
+				System.out.print("\nStrange, we could not find a game with that name.");
+				System.out.print("\nPlease a the name for your game. Game name: ");
+				name = s2.nextLine();
+
+				fileExists = checkIfFileExists(name + ".txt");
+				tryThreeTimes++;
+
+				if((tryThreeTimes == 2) && (!fileExists))
+				{
+					System.out.print("\nStrange, we could not find a game with that name.");
+					System.out.print("\nWe will now take you back to the main menu. ");
+					System.out.println();
+				}
+			}
+
+			fileReader = new FileInputStream(name + ".txt");
+			inputStream = new ObjectInputStream(fileReader);
+
+			game = (Game) inputStream.readObject();
+			//isPlayer1 = Boolean.parseBoolean(nextLine);
+
+			//methods to set map to map
+			// methods to set all the rest
+
+
+		}
+
+		catch (IOException | ClassNotFoundException e)
+		{
+			System.out.println("Sorry, an error occurred."+ " \n");
+		}
+
+		finally
+		{
+			try
+			{
+				if (fileReader != null)
+				{
+					fileReader.close();
+				}
+				if (inputStream != null) {
+					inputStream.close();
+				}
+			}
+
+			catch (IOException e)
+			{
+				System.out.println("Sorry, an error occurred.");
+			}
+		}
+	}
+
+	public boolean checkIfFileExists (String fileName)
+	{
+		File firstFile = new File(fileName);
+		boolean exists = firstFile.exists();
+		boolean readable = firstFile.canRead();
+		boolean yepOrNope = false;
+
+		if (exists && readable)
+		{
+			yepOrNope = true;
+		}
+
+		return yepOrNope;
 	}
 }
 		
