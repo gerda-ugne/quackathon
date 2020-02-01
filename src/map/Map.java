@@ -1,6 +1,8 @@
 package map;
 
-public class Map {
+import java.io.Serializable;
+
+public class Map implements Serializable {
 
 	public static final char CAN_GO_CHAR = '.';
 	public static final char OBSTACLE_CHAR = 'O';
