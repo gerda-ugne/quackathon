@@ -158,7 +158,7 @@ public class Menu
 					notAValidName = true;
 				}
 				
-			} while (notAValidName == true);
+			} while (notAValidName);
 			
 			System.out.println("\nThanks. ");
 		
@@ -189,11 +189,11 @@ public class Menu
 			
 			if (game.isPlayer1())
 			{
-				System.out.print("\n ... change to player 1? Please enter number 2.");
+				System.out.print("\n ... change to player 2? Please enter number 2.");
 			}
 			else
 			{
-				System.out.print("\n ... change to player 2? Please enter number 2.");
+				System.out.print("\n ... change to player 1? Please enter number 2.");
 			}
 			
 			
@@ -217,7 +217,7 @@ public class Menu
 				case "1":
 
 					System.out.print("\n Welcome back " + (game.isPlayer1() ? namePlayer1 : namePlayer2) + "!" + "\n");
-					game.playGame();
+					game.playGame(s2);
 					gameMenu();
 					break;
 
@@ -225,12 +225,12 @@ public class Menu
 
                     if(game.isPlayer1())
                     {
-                        game.setPlayer1 = false;
+                        game.setPlayer1(false);
                     }
 			
                     else
                     {
-                        game.setPlayer1 = true;
+						game.setPlayer1(true);
                     }
 
                     break;
@@ -296,7 +296,7 @@ public class Menu
 			{
 				
 				case "1":
-					
+					game.playGame(s2);
 					
 					break;
 				

@@ -1,5 +1,6 @@
 import map.Map;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Game {
@@ -9,10 +10,10 @@ public class Game {
 	private int player2X;
 	private int player2Y;
 
-	public static void main(String[] args) {
-		Game test = new Game();
-		test.playGame(new Scanner(System.in));
-	}
+//	public static void main(String[] args) {
+//		Game test = new Game();
+//		test.playGame(new Scanner(System.in));
+//	}
 
 	private boolean isPlayer1;
 
@@ -26,13 +27,6 @@ public class Game {
 		map = new Map();
 		isPlayer1 = true;
 	}
-
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		Game myTest = new Game();
-//		myTest.test();
-//
-//	}
 
 	/**
 	 * Getter for player1
@@ -49,11 +43,6 @@ public class Game {
 	public void setPlayer1(boolean player1)
 	{
 		this.isPlayer1 = player1;
-	}
-	
-	public void test()
-	{
-		map.displayMap();
 	}
 
 	public void playGame(Scanner in) {
@@ -131,20 +120,42 @@ public class Game {
 		int playerY = isPlayer1 ? player1Y : player2Y;
 		switch (direction) {
 			case 't':
-				map.setField(playerX, playerY - 1, isPlayer1 ? Map.PLAYER_1_CHAR : Map.PLAYER_2_CHAR);
+				map.setField(playerX, playerY--, Map.CAN_GO_CHAR);
 				break;
 			case 'r':
-				map.setField(playerX + 1, playerY, isPlayer1 ? Map.PLAYER_1_CHAR : Map.PLAYER_2_CHAR);
+				map.setField(playerX++, playerY, Map.CAN_GO_CHAR);
 				break;
 			case 'b':
-				map.setField(playerX, playerY + 1, isPlayer1 ? Map.PLAYER_1_CHAR : Map.PLAYER_2_CHAR);
+				map.setField(playerX, playerY++, Map.CAN_GO_CHAR);
 				break;
 			case 'l':
-				map.setField(playerX - 1, playerY, isPlayer1 ? Map.PLAYER_1_CHAR : Map.PLAYER_2_CHAR);
+				map.setField(playerX--, playerY, Map.CAN_GO_CHAR);
 				break;
 			default:
 				return;
 		}
-		map.setField(playerX, playerY, Map.CAN_GO_CHAR);
+		map.setField(playerX, playerY, isPlayer1 ? Map.PLAYER_1_CHAR : Map.PLAYER_2_CHAR);
+		if (isPlayer1) {
+			player1X = playerX;
+			player1Y = playerY;
+		} else {
+			player2X = playerX;
+			player2Y = playerY;
+		}
+	}
+
+	public boolean checkIfFileExists (String fileName)
+	{
+		File firstFile = new File(fileName);
+		boolean exists = firstFile.exists();
+		boolean readable = firstFile.canRead();
+		boolean yepOrNope = false;
+
+		if (exists && readable)
+		{
+			yepOrNope = true;
+		}
+
+		return yepOrNope;
 	}
 }
