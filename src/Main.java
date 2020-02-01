@@ -1,3 +1,4 @@
+import map.Map;
 
 public class Main {
 
