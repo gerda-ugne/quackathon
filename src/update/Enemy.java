@@ -55,8 +55,8 @@ public class Enemy {
 	public int attack()
 	{
 		int damage = (int )(Math.random() *10  + 1);
-		System.out.println("Enemy has attacked you!");
-		System.out.println("Enemy has inflicted " + damage + " points of damage.");
+		System.out.println("Human has thrown a plastic bag at you!");
+		System.out.println("Human has inflicted " + damage + " points of damage.");
 		
 		return damage;
 		
@@ -71,11 +71,11 @@ public class Enemy {
 	{
 		if (mana < 40)
 		{
-			System.out.println("Enemy does not have enough MP to cast a special attack. They rest.");
+			System.out.println("Human does not have enough energy to cast a special attack. They rest.");
 			return 0;
 		}
 		int damage = (int )(Math.random() *20  + 5);
-		System.out.println("Enemy has used a special attack on you!");
+		System.out.println("Human has thrown a plastic bottle at you!");
 		System.out.println("Enemy has inflicted " + damage + " points of damage.");
 		
 		mana = mana - 40;
@@ -92,8 +92,8 @@ public class Enemy {
 	{
 		int HPPoints = (int )(Math.random() *15  + 40);
 		
-		System.out.println("Enemy has used a health potion!");
-		System.out.println("Enemy has gained " + HPPoints + " health points.");
+		System.out.println("Human has a snack to restore their health!");
+		System.out.println("Human has gained " + HPPoints + " health points.");
 		
 		health = health + HPPoints;
 	}
@@ -106,8 +106,8 @@ public class Enemy {
 	{
 		int MPPoints = (int )(Math.random() *15  + 40);
 		
-		System.out.println("Enemy has used a mana potion!");
-		System.out.println("Enemy has gained " + MPPoints + " mana points.");
+		System.out.println("Human has an energy drink!");
+		System.out.println("Human has gained " + MPPoints + " mana points.");
 		
 		mana = mana + MPPoints;
 	}
