@@ -104,7 +104,7 @@ public class Menu
 					+ "\n ... start a new game? Please enter number 1."
 					+ "\n ... load an old game? Please enter number 2.");
 					
-            System.out.print(\nWhich number do you chose? Number = ")
+            System.out.print("\nWhich number do you chose? Number = ");
 			
 			Scanner s1 = new Scanner(System.in);
 			String choice = s1.nextLine();
@@ -210,7 +210,7 @@ public class Menu
 				case "1":
 
 					System.out.print("\n Welcome back " + (game.isPlayer1() ? namePlayer1 : namePlayer2) + "!" + "\n");
-					game.playGame();
+					game.playGame(s2);
 					gameMenu();
 					break;
 
@@ -218,12 +218,12 @@ public class Menu
 
                     if(game.isPlayer1())
                     {
-                        game.setPlayer1 = false;
+                        game.setPlayer1(false);
                     }
 			
                     else
                     {
-                        game.setPlayer1 = true;
+                        game.setPlayer1(true);
                     }
 
                     break;
