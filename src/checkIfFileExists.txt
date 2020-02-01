@@ -1,0 +1,14 @@
+public boolean checkIfFileExists (String fileName)
+	{
+		File firstFile = new File(fileName);
+		boolean exists = firstFile.exists();
+		boolean readable = firstFile.canRead(); 
+		boolean yepOrNope = false;
+		
+		if ((exists == true) && (readable == true))
+		{
+			yepOrNope = true;
+		}
+	
+		return yepOrNope;
+	}
