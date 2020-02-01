@@ -65,14 +65,14 @@ public class Main {
 				
 				showCombatOptions();
 				
-				switch(userInput)
-				{
-				case "1": player.attack();attackLimit++; break;
-				case "2": player.specialAttack(); specialAttackLimit++; break;
-				case "3": player.healHP(); healHPLimit++; break;
-				case "4": player.healMP(); healMPLimit++; break;
-				case "0": player.flee();break;
-				}
+//				switch(userInput)
+//				{
+//				case "1": player.attack();attackLimit++; break;
+//				case "2": player.specialAttack(); specialAttackLimit++; break;
+//				case "3": player.healHP(); healHPLimit++; break;
+//				case "4": player.healMP(); healMPLimit++; break;
+//				case "0": player.flee();break;
+//				}
 				
 			}
 			

@@ -41,7 +41,6 @@ public class Player
     {
     	this.name = name;
     	this.maxHp = maxHp;
-    	this.maxHp = maxHp;
         this.minDmg = minDmg;
         this.maxDmg = maxDmg;
         this.defence = defence;
