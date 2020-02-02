@@ -1,4 +1,4 @@
-package main.Stacks;
+package main.players;
 
 import java.util.ArrayList;
 
@@ -20,11 +20,11 @@ public class Inventory
     public void addToInventory(String item) {
         if (inventory.size() < capacity) {
             inventory.add(item);
-        } else System.out.println("main.Stacks.Inventory is full!");
+        } else System.out.println("main.players.Inventory is full!");
     }
 
     public void showInventory() {
-        System.out.println("\nmain.Stacks.Inventory:");
+        System.out.println("\nmain.players.Inventory:");
         for (String item : inventory) {
             System.out.println(item);
         }

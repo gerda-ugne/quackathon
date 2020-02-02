@@ -1,11 +1,11 @@
 package main;
 
-import main.Stacks.Enemy;
 import main.map.Field;
 import main.map.Map;
+import main.players.Enemy;
+import main.players.Player;
 
 import java.io.*;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game implements Serializable {

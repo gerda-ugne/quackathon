@@ -1,6 +1,5 @@
-package main;
+package main.players;
 
-import main.Stacks.Inventory;
 import java.util.Random;
 
 public class Player

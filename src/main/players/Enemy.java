@@ -1,4 +1,4 @@
-package main.Stacks;
+package main.players;
 
 import java.util.Random;
 
