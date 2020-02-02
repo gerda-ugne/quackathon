@@ -1,6 +1,7 @@
 package main;
 
 import main.Stacks.Inventory;
+import java.util.Random;
 
 public class Player
 {
@@ -20,7 +21,7 @@ public class Player
 	 * Checks if the player is still alive
 	 * @return true/false depending on the state
 	 */
-	public boolean isAlive()
+	public boolean isPlayerAlive()
 	{
 		return health > 0;
 	}
@@ -39,7 +40,8 @@ public class Player
 	 */
     public int attack()
 	{
-		int damage = (int )(Math.random() *15  + 3);
+    	Random rand = new Random();
+		int damage = rand.nextInt(20);
 		System.out.println("You pinch the human with your beak!");
 		System.out.println("You have inflicted " + damage + " points of damage.");
 
@@ -53,13 +55,14 @@ public class Player
 	 */
 	public int specialAttack()
 	{
+		Random rand = new Random();
 		if(mana < 40)
 		{
 			System.out.println("You don't have enough energy to cast the special attack! You rest.");
 			return 0;
 		}
 
-		int damage = (int )(Math.random() *25  + 7);
+		int damage = rand.nextInt(50);
 		System.out.println("You furiously flap your wings at the human, inflicting serious damage!");
 		System.out.println("You have inflicted " + damage + " points of damage.");
 		mana = mana - 40;
@@ -79,7 +82,7 @@ public class Player
 
 		if(isPotionReal == true)
 		{
-			int HPPoints = (int )(Math.random() *20  + 45);
+			int HPPoints = 40;
 
 			System.out.println("You had a crunchy worm with a rock. You feel restored!");
 			System.out.println("You have gained " + HPPoints + " health points.");
@@ -106,7 +109,7 @@ public class Player
 
 		if(isPotionReal == true)
 		{
-			int MPPoints = (int )(Math.random() *20  + 45);
+			int MPPoints = 50;
 
 			System.out.println("You have used your wax for a power up!");
 			System.out.println("You have gained " + MPPoints + " mana points.");

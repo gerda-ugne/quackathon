@@ -207,15 +207,6 @@ public class Map implements Serializable {
 
 	public void moveEnemies() {
 		Random rnd = new Random();
-		int enemyNumbers = 0;
-		for(int i=0; i<map.length;i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				Field moveTo = null;
-				if (map[i][j].getCharacter() == Field.HUMAN_CHAR) {
-					enemyNumbers++;
-				}
-			}
-		}
 		for(int i=0; i<map.length;i++)
 		{
 			for(int j=0; j<map[i].length;j++)
@@ -245,7 +236,6 @@ public class Map implements Serializable {
 				}
 			}
 		}
-		System.out.println("Enemies: " + enemyNumbers);
 	}
 
 	public char getField(int x, int y) throws IndexOutOfBoundsException {

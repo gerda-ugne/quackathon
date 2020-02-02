@@ -125,14 +125,14 @@ public class Main {
 			player.setHealth(player.getHealth()- enemyDamage);
 
 
-		} while(enemy.isEnemyAlive() == false || player.isAlive() == false);
+		} while(enemy.isEnemyAlive() == false || player.isPlayerAlive() == false);
 
 
 	if(enemy.isEnemyAlive() == false)
 	{
 		System.out.println("You have scared the polluter human and they have ran away! Good job.");
 	}
-	else if(player.isAlive() == false)
+	else if(player.isPlayerAlive() == false)
 	{
 		System.out.println("The polluter has drowned you in trash and you have lost all your items. You must retreat for now.");
 	}

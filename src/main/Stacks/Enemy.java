@@ -1,5 +1,7 @@
 package main.Stacks;
 
+import java.util.Random;
+
 public class Enemy {
 
 	private int health;
@@ -55,7 +57,9 @@ public class Enemy {
 	 */
 	public int attack()
 	{
-		int damage = (int )(Math.random() *10  + 1);
+		Random rand = new Random();
+
+		int damage = rand.nextInt(20);
 		System.out.println("Human has thrown a plastic bag at you!");
 		System.out.println("Human has inflicted " + damage + " points of damage.");
 
@@ -70,12 +74,13 @@ public class Enemy {
 	 */
 	public int specialAttack()
 	{
+		Random rand = new Random();
 		if (mana < 40)
 		{
 			System.out.println("Human does not have enough energy to cast a special attack. They rest.");
 			return 0;
 		}
-		int damage = (int )(Math.random() *20  + 5);
+		int damage = rand.nextInt(40);
 		System.out.println("Human has thrown a plastic bottle at you!");
 		System.out.println("Enemy has inflicted " + damage + " points of damage.");
 
@@ -91,7 +96,7 @@ public class Enemy {
 	 */
 	public void healHP()
 	{
-		int HPPoints = (int )(Math.random() *15  + 40);
+		int HPPoints = 7;
 
 		System.out.println("Human has a snack to restore their health!");
 		System.out.println("Human has gained " + HPPoints + " health points.");
@@ -105,7 +110,7 @@ public class Enemy {
 	 */
 	public void healMP()
 	{
-		int MPPoints = (int )(Math.random() *15  + 40);
+		int MPPoints = 10;
 
 		System.out.println("Human has an energy drink!");
 		System.out.println("Human has gained " + MPPoints + " mana points.");
