@@ -60,7 +60,7 @@ public class Game implements Serializable {
 		int playerY = isPlayer1 ? player1Y : player2Y;
 		char direction = ' ';
 		boolean valid = false;
-		boolean fightWon = true;
+		boolean fightWon;
 
 		while (!valid) {
 			direction = getDirection(in);
@@ -186,21 +186,17 @@ public class Game implements Serializable {
 		String userInput;
 		String enemyInput;
 
-		String recordedUserMoves = "";
-		String recordedEnemyMoves = "";
-
-
 		//Records damage enemy and player do each turn
-		int enemyDamage =  0;
-		int playerDamage = 0;
+		int enemyDamage;
+		int playerDamage;
 
 		//Retry if input is invalid
-		boolean retry=false;
+		boolean retry;
 
 		do {
 
 			//Player has their turn first
-			recordedUserMoves = "";
+			StringBuilder recordedUserMoves = new StringBuilder();
 			for (int i=0; i<2; i++)
 			{
 				do
@@ -217,31 +213,31 @@ public class Game implements Serializable {
 
 					switch(userInput)
 					{
-					case "1": recordedUserMoves = recordedUserMoves + "1";break;
-					case "2": recordedUserMoves = recordedUserMoves + "2"; break;
-					case "3": recordedUserMoves = recordedUserMoves + "3"; break;
-					case "4": recordedUserMoves = recordedUserMoves + "4"; break;
+					case "1": recordedUserMoves.append("1");break;
+					case "2": recordedUserMoves.append("2"); break;
+					case "3": recordedUserMoves.append("3"); break;
+					case "4": recordedUserMoves.append("4"); break;
 					case "0": player.flee(); return false;
 					default: System.out.println("Please try again - wrong user input."); retry = true; break;
 					}
 
 					//separating input with a space
 					System.out.println("Option recorded! \n");
-					recordedUserMoves = recordedUserMoves + " ";
+					recordedUserMoves.append(" ");
 
-				} while (retry==true);
+				} while (retry);
 			}
 
 			//Player choices are executed, damage recorded
-			playerDamage = player.execute(recordedUserMoves);
+			playerDamage = player.execute(recordedUserMoves.toString());
 
 			//Enemy health is deduced after player moves
 			enemy.setHealth(enemy.getEnemyHealth()-playerDamage);
-			if(enemy.isEnemyAlive() == false) break;
+			if(!enemy.isEnemyAlive()) break;
 
 			//Enemy has their turn
 			System.out.println("\nHuman has their turn!");
-			recordedEnemyMoves = "";
+			StringBuilder recordedEnemyMoves = new StringBuilder();
 
 			for (int i=0; i<2; i++)
 			{
@@ -250,28 +246,28 @@ public class Game implements Serializable {
 
 				switch(enemyInput)
 				{
-				case "1": recordedEnemyMoves = recordedEnemyMoves + "1";break;
-				case "2": recordedEnemyMoves = recordedEnemyMoves + "2"; break;
-				case "3": recordedEnemyMoves = recordedEnemyMoves + "3"; break;
-				case "4": recordedEnemyMoves = recordedEnemyMoves + "4"; break;
+				case "1": recordedEnemyMoves.append("1");break;
+				case "2": recordedEnemyMoves.append("2"); break;
+				case "3": recordedEnemyMoves.append("3"); break;
+				case "4": recordedEnemyMoves.append("4"); break;
 				}
 
 				//Separating input with a space
-				recordedEnemyMoves = recordedEnemyMoves + " ";
+				recordedEnemyMoves.append(" ");
 
 			}
 
 			//Enemy choices are executed, damage recorded
-			enemyDamage = enemy.execute(recordedEnemyMoves);
+			enemyDamage = enemy.execute(recordedEnemyMoves.toString());
 
 			//Player's health is deduced after enemy moves
 			player.setHealth(player.getHealth()- enemyDamage);
 
 
-		} while(enemy.isEnemyAlive() == true && player.isPlayerAlive() == true);
+		} while(enemy.isEnemyAlive() && player.isPlayerAlive());
 
 
-	if(enemy.isEnemyAlive() == false)
+	if(!enemy.isEnemyAlive())
 	{
 		System.out.println("You have scared the polluter human and they have ran away! Good job.");
 		return true;
@@ -279,10 +275,10 @@ public class Game implements Serializable {
 
 
 	}
-	else if(player.isPlayerAlive() == false)
+	else if(!player.isPlayerAlive())
 	{
 		System.out.println("The polluter has drowned you in trash and you have lost all your items. You must retreat for now.");
-		if(isPlayer1 == true)
+		if(isPlayer1)
 		{
 			player1Y = 0;
 			player1X = Map.MAP_SIZE - 1;
