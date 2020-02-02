@@ -13,20 +13,15 @@ public class Game implements Serializable {
 	private int player2X;
 	private int player2Y;
 
-//	public static void main(String[] args) {
-//		Game test = new Game();
-//		test.playGame(new Scanner(System.in));
-//	}
-
 	private boolean isPlayer1;
 
 	private Map map;
 
 	public Game() {
-		player1X = 0;
-		player1Y = Map.MAP_SIZE - 1;
-		player2X = Map.MAP_SIZE - 1;
-		player2Y = 0;
+		player1X = Map.MAP_SIZE - 1;
+		player1Y = 0;
+		player2X = 0;
+		player2Y = Map.MAP_SIZE - 1;
 		map = new Map();
 		isPlayer1 = true;
 	}

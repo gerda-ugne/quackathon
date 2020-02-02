@@ -6,6 +6,7 @@ public class Field {
     public static final char OBSTACLE_CHAR = 'O';
     public static final char PLAYER_1_CHAR = '1';
     public static final char PLAYER_2_CHAR = '2';
+    public static final char HUMAN_CHAR = 'H';
 
     private int x;
     private int y;

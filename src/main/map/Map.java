@@ -10,15 +10,14 @@ import java.util.stream.Stream;
 
 public class Map implements Serializable {
 
-	public static void main(String[] args) {
-		Map test = new Map();
-		test.generateMap();
-		test.displayMap();
-	}
+//	public static void main(String[] args) {
+//		Map map = new Map();
+//		map.generateMap();
+//		map.displayMap();
+//	}
 
 	private Field[][] map;
 	public final static int MAP_SIZE = 10;
-
 
 	public Map() {
 
@@ -45,7 +44,8 @@ public class Map implements Serializable {
 				map[i][j] = new Field(j, i);
 			}
 		}
-		
+
+		generateMap();
 	}
 
 	/**
@@ -87,7 +87,9 @@ public class Map implements Serializable {
 		start.setCharacter(Field.CAN_GO_CHAR);
 		end.setCharacter(Field.CAN_GO_CHAR);
 		start.setCanMove(true);
+		start.setCharacter(Field.PLAYER_1_CHAR);
 		end.setCanMove(true);
+		end.setCharacter(Field.PLAYER_2_CHAR);
 		map[0][MAP_SIZE - 1] = start;
 		map[MAP_SIZE - 1][0] = end;
 
@@ -173,6 +175,32 @@ public class Map implements Serializable {
 
 			unblocked.add(newSet);
 			System.out.println();
+		}
+
+		addEnemies();
+	}
+
+	/**
+	 * Places enemies on the map randomly.
+	 *
+	 */
+	public void addEnemies()
+	{
+		int enemyCount = 3;
+
+		Random rand = new Random();
+		int enemyPositionX;
+		int enemyPositionY;
+
+		for(int i=0; i<enemyCount; i++)
+		{
+			System.out.println();
+			do {
+				enemyPositionY = rand.nextInt(MAP_SIZE);
+				enemyPositionX = rand.nextInt(MAP_SIZE);
+			} while (!(map[enemyPositionX][enemyPositionY].getCharacter() == Field.CAN_GO_CHAR));
+
+			map[enemyPositionX][enemyPositionY].setCharacter('H');
 		}
 	}
 
