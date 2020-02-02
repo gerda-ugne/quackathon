@@ -9,7 +9,6 @@ public class Enemy implements Serializable {
 	private int mana;
 
 	public Enemy() {
-		// TODO Auto-generated constructor stub
 		health = 100;
 		mana = 50;
 

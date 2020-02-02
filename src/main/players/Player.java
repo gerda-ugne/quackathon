@@ -168,6 +168,12 @@ public class Player implements Serializable
 		this.health = health;
 	}
 
+	public int getMana() {
+		return mana;
+	}
 
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
 }
 

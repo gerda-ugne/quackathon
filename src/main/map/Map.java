@@ -73,9 +73,7 @@ public class Map implements Serializable {
 
 		start.setCharacter(Field.CAN_GO_CHAR);
 		end.setCharacter(Field.CAN_GO_CHAR);
-		start.setCanMove(true);
 		start.setCharacter(Field.PLAYER_1_CHAR);
-		end.setCanMove(true);
 		end.setCharacter(Field.PLAYER_2_CHAR);
 		map[0][MAP_SIZE - 1] = start;
 		map[MAP_SIZE - 1][0] = end;
@@ -92,7 +90,6 @@ public class Map implements Serializable {
 			}
 			int x = newUnblocked.getX();
 			int y = newUnblocked.getY();
-			newUnblocked.setCanMove(true);
 			newUnblocked.setCharacter(Field.CAN_GO_CHAR);
 			map[x][y] = newUnblocked;
 
@@ -115,7 +112,7 @@ public class Map implements Serializable {
 				left = map[x - 1][y];
 			} catch (IndexOutOfBoundsException ignore) {	}
 
-			if (up != null && up.canMove()) {
+			if (up != null && (up.canMove() || up.getCharacter() == '1' || up.getCharacter() == '2')) {
 				Field finalUp = up;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalUp))
@@ -126,7 +123,7 @@ public class Map implements Serializable {
 					newSet = Stream.concat(newSet.stream(), neighbor.stream()).collect(Collectors.toList());
 				}
 			}
-			if (right != null && right.canMove()) {
+			if (right != null && (right.canMove() || right.getCharacter() == '1' || right.getCharacter() == '2')) {
 				Field finalRight = right;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalRight))
@@ -137,7 +134,7 @@ public class Map implements Serializable {
 					newSet = Stream.concat(newSet.stream(), neighbor.stream()).collect(Collectors.toList());
 				}
 			}
-			if (down != null && down.canMove()) {
+			if (down != null && (down.canMove() || down.getCharacter() == '1' || down.getCharacter() == '2')) {
 				Field finalDown = down;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalDown))
@@ -148,7 +145,7 @@ public class Map implements Serializable {
 					newSet = Stream.concat(newSet.stream(), neighbor.stream()).collect(Collectors.toList());
 				}
 			}
-			if (left != null && left.canMove()) {
+			if (left != null && (left.canMove() || left.getCharacter() == '1' || left.getCharacter() == '2')) {
 				Field finalLeft = left;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalLeft))

@@ -13,14 +13,12 @@ public class Field implements Serializable {
 
     private int x;
     private int y;
-    private boolean canMove;
     private boolean hasItem;
     private char character;
 
     public Field(int x, int y) {
         this.x = x;
         this.y = y;
-        canMove = false;
         hasItem = false;
         character = OBSTACLE_CHAR;
     }
@@ -31,14 +29,6 @@ public class Field implements Serializable {
 
     public int getY() {
         return y;
-    }
-
-    public boolean canMove() {
-        return canMove;
-    }
-
-    public void setCanMove(boolean canMove) {
-        this.canMove = canMove;
     }
 
     public boolean hasItem() {
@@ -55,5 +45,14 @@ public class Field implements Serializable {
 
     public void setCharacter(char character) {
         this.character = character;
+    }
+
+    public boolean canMove() {
+        switch (character) {
+            case CAN_GO_CHAR: case TRASH_CHAR: case HUMAN_CHAR:
+                return true;
+            default:
+                return false;
+        }
     }
 }

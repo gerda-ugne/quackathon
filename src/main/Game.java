@@ -60,9 +60,9 @@ public class Game implements Serializable {
 		int playerY = isPlayer1 ? player1Y : player2Y;
 		char direction = ' ';
 		boolean valid = false;
-		boolean fightWon;
 
 		while (!valid) {
+			int fightWon = -1;
 			direction = getDirection(in);
 			int destinationX;
 			int destinationY;
@@ -95,12 +95,17 @@ public class Game implements Serializable {
 						continue;
 					case Field.HUMAN_CHAR:
 						fightWon = combat();
-						if(fightWon)
-						{
-							map.setField(playerX-1, playerY, Field.CAN_GO_CHAR);
-							valid = true;
-							continue;
+						switch (fightWon) {
+							case -1:
+								return;
+							case 0:
+								continue;
+							case 1:
+								map.setField(playerX, playerY, Field.CAN_GO_CHAR);
+								valid = true;
+								continue;
 						}
+						break;
 					case Field.TRASH_CHAR:
 						valid = true;
 						player.addToInventory(rnd.nextInt(2) == 0 ? Inventory.MP_POTION : Inventory.HP_POTION);
@@ -110,7 +115,9 @@ public class Game implements Serializable {
 				}
 			} catch (IndexOutOfBoundsException | IllegalStateException ignore) { }
 
-			System.out.println("You cannot go into that direction.");
+			if (fightWon != 1) {
+				System.out.println("You cannot go into that direction.");
+			}
 		}
 		movePlayer(direction);
 		checkForVictory();
@@ -130,7 +137,7 @@ public class Game implements Serializable {
 			System.out.println("Left:   l");
 			direction = in.nextLine();
 			switch (direction) {
-				case "t": case "r": case "d": case "l":
+				case "u": case "r": case "d": case "l":
 					valid = true;
 					break;
 				default:
@@ -180,10 +187,12 @@ public class Game implements Serializable {
 
 	}
 
-	public boolean combat()
+	// return -1: death, 0: flee, 1: victory
+	public int combat()
 	{
 		System.out.println("You have encountered a human, and they seem to be polluting the lake!");
 		Scanner s = new Scanner(System.in);
+		enemy = new Enemy();
 		String userInput;
 		String enemyInput;
 
@@ -218,7 +227,7 @@ public class Game implements Serializable {
 					case "2": recordedUserMoves.append("2"); break;
 					case "3": recordedUserMoves.append("3"); break;
 					case "4": recordedUserMoves.append("4"); break;
-					case "0": player.flee(); return false;
+					case "0": player.flee(); return 0;
 					default: System.out.println("Please try again - wrong user input."); retry = true; break;
 					}
 
@@ -271,7 +280,7 @@ public class Game implements Serializable {
 		if(!enemy.isEnemyAlive())
 		{
 			System.out.println("You have scared the polluter human and they have ran away! Good job.");
-			return true;
+			return 1;
 
 
 
@@ -281,26 +290,32 @@ public class Game implements Serializable {
 			System.out.println("The polluter has drowned you in trash. As you awaken, you discover snacks in your inventory. You must retreat for now.");
 			if(isPlayer1)
 			{
+				map.setField(player1X, player1Y, Field.CAN_GO_CHAR);
 				player1Y = 0;
 				player1X = Map.MAP_SIZE - 1;
+				map.setField(player1X, player1Y, Field.PLAYER_1_CHAR);
 			}
 			else
 			{
+				map.setField(player2X, player2Y, Field.CAN_GO_CHAR);
 				player2Y = Map.MAP_SIZE - 1;
 				player2X = 0;
+				map.setField(player2X, player2Y, Field.PLAYER_2_CHAR);
 			}
 
 			player.getInv().resetInventory();
-			return false;
+			player.setHealth(100);
+			player.setMana(100);
+			return -1;
 		}
 
-		return false;
+		return -1;
 
 	  }
 
 	private void checkForVictory() {
 		for (int i = 0; i < Map.MAP_SIZE; i++) {
-			for (int j = 0; i < Map.MAP_SIZE; j++) {
+			for (int j = 0; j < Map.MAP_SIZE; j++) {
 				if (map.getField(i, j) == Field.TRASH_CHAR || map.getField(i, j) == Field.HUMAN_CHAR) {
 					return;
 				}
