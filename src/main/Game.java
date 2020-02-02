@@ -125,7 +125,7 @@ public class Game implements Serializable {
 			System.out.println("Where would you like to move?");
 			System.out.println("Top:    t");
 			System.out.println("Right:  r");
-			System.out.println("Bottom: b");
+			System.out.println("Down:   d");
 			System.out.println("Left:   l");
 			direction = in.nextLine();
 			switch (direction) {
