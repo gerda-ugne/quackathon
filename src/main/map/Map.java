@@ -158,8 +158,6 @@ public class Map implements Serializable {
 			}
 
 			unblocked.add(newSet);
-			displayMap();
-			System.out.println();
 			System.out.println();
 		}
 

@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Inventory implements Serializable
 {
-    public static final String HP_POTION = "Nutrients";
-    public static final String MP_POTION = "Wax";
+    public static final String HP_POTION = "Nutrients - Use these when you're low on health";
+    public static final String MP_POTION = "Wax - Wax restores your energy levels!";
     private List<String> inventory;
     private int capacity;
 
@@ -28,7 +28,7 @@ public class Inventory implements Serializable
     }
 
     public void showInventory() {
-        System.out.println("Inventory:");
+        System.out.println("Here's your inventory:");
         for (String item : inventory) {
             System.out.println(item);
         }

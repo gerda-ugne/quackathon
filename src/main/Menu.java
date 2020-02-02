@@ -67,14 +67,20 @@ public class Menu
 	{
 		if (count == 0)
 		{
-			System.out.println(
-					"            ,-.\n" +
-					"    ,      ( {o\\\n" +
-					"    {`\"=,___) (`~\n" +
-					"     \\  ,_.-   )\n" +
-					"~^~^~^`- ~^ ~^ '~^~^~^~"
-			);
-			
+			System.out.println("\n" +
+					"                 ,-.                   ,-.\n" +
+					"         ,      ( {o\\          ,      ( {o\\\n" +
+					"         {`\"=,___) (`~         {`\"=,___) (`~\n" +
+					"          \\  ,_.-   )          \\  ,_.-   )\n" +
+					"~^~^~^~^~^`- ~^ ~^ '~^~^~^~~^~^~^`- ~^ ~^ '~^~^~^~~^~^~^~^");
+
+			System.out.println("\n" +
+					"\n" +
+					" __             __   __          __        __        __  \n" +
+					"/__` |\\ |  /\\  |__) |__) \\ /    |  \\ |  | /  ` |__/ /__` \n" +
+					".__/ | \\| /~~\\ |    |     |     |__/ \\__/ \\__, |  \\ .__/ \n" +
+					"                                                         \n" +
+					"\n");
 			System.out.println("Hello. This is Snappy Ducks!" );
 			
 			typeSlowest("\nOur hero, duck Beacky, comes back to her home pond and meets");
@@ -196,7 +202,7 @@ public class Menu
                     break;
 
 				case "3": //help menu
-					typeSlow("\nThis is SNAPPYducks! These are the rules:");
+					typeSlow("\nRules:");
 					typeSlow("You start the game as Beacky. \n");
 					typeSlow("You can move around by following the directions displayed on screen.");
 					typeSlow("The pond contains many obstacles, so make sure you don't lose your way.");
@@ -227,7 +233,7 @@ public class Menu
 
 				case "4":
 					end = true;
-					typeSlow("\nThank you for playing SNAPPYducks. We hope you have enjoyed it. \nGoodybe. ");
+					typeSlow("\nThank you for playing Snappy Ducks. We hope you have enjoyed it. \nGoodybe. ");
 					System.out.println();
 					System.out.println();
 					System.exit(0);
@@ -282,7 +288,7 @@ public class Menu
 
 			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3") && !decision.equals("4") && !(decision.equals("5")))
 			{
-				System.out.print("\nError. Please enter an integer between 1-4!");
+				System.out.print("\nError. Please enter an integer between 1-5!");
 				typeSlow("\nWhich number do you chose? Number = ");
 				decision = s2.nextLine();
 			}
@@ -307,7 +313,7 @@ public class Menu
                     {
 						game.setPlayer1(true);
 						game.setCountingSteps(0);
-						typeSlow("Player changed! Welcome back Quilly!");
+						typeSlow("Player changed! Welcome back Beacky!");
                     }
                     break;
 
@@ -487,7 +493,7 @@ public class Menu
 		for (String aTxt : txt)
 		{
 			System.out.print(aTxt);
-			sleepMe(60);
+			sleepMe(50);
 		}
 
 		System.out.println();

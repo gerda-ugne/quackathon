@@ -136,6 +136,8 @@ public class Game implements Serializable {
 					case Field.TRASH_CHAR:
 						valid = true;
 						player.addToInventory(rnd.nextInt(2) == 0 ? Inventory.MP_POTION : Inventory.HP_POTION);
+
+						System.out.println("You've just picked up some trash and got a power up!");
 						player.showInventory();
 						valid = true;
 						continue;
@@ -239,7 +241,7 @@ public class Game implements Serializable {
 			StringBuilder recordedUserMoves = new StringBuilder();
 			System.out.println("\nYour status:");
 			System.out.println("Your health: " + player.getHealth());
-			System.out.println("Your mana: " + player.getMana());
+			System.out.println("Your energy: " + player.getMana());
 			System.out.println();
 
 			for (int i=0; i<2; i++)
@@ -283,7 +285,7 @@ public class Game implements Serializable {
 			//Enemy has their turn
 			System.out.println("\nHuman status:");
 			System.out.println("Human health: " + enemy.getEnemyHealth());
-			System.out.println("Human mana: " + enemy.getMana());;
+			System.out.println("Human energy: " + enemy.getMana());;
 			System.out.println();
 
 			System.out.println("Human has their turn!");
