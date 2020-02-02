@@ -1,8 +1,9 @@
 package main.players;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Enemy {
+public class Enemy implements Serializable {
 
 	private int health;
 	private int mana;

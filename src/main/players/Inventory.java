@@ -1,9 +1,10 @@
 package main.players;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inventory
+public class Inventory implements Serializable
 {
     public static final String HP_POTION = "HP Potion";
     public static final String MP_POTION = "MP Potion";

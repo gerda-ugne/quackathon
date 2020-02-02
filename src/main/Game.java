@@ -69,7 +69,7 @@ public class Game implements Serializable {
 
 			try {
 				switch (direction) {
-					case 't':
+					case 'u':
 						destinationX = playerX;
 						destinationY = playerY - 1;
 						break;
@@ -77,7 +77,7 @@ public class Game implements Serializable {
 						destinationX = playerX + 1;
 						destinationY = playerY;
 						break;
-					case 'b':
+					case 'd':
 						destinationX = playerX;
 						destinationY = playerY + 1;
 						break;
@@ -123,13 +123,13 @@ public class Game implements Serializable {
 		do {
 			map.displayMap();
 			System.out.println("Where would you like to move?");
-			System.out.println("Top:    t");
+			System.out.println("Up:     u");
 			System.out.println("Right:  r");
 			System.out.println("Down:   d");
 			System.out.println("Left:   l");
 			direction = in.nextLine();
 			switch (direction) {
-				case "t": case "r": case "b": case "l":
+				case "t": case "r": case "d": case "l":
 					valid = true;
 					break;
 				default:
@@ -144,13 +144,13 @@ public class Game implements Serializable {
 		int playerX = isPlayer1 ? player1X : player2X;
 		int playerY = isPlayer1 ? player1Y : player2Y;
 		switch (direction) {
-			case 't':
+			case 'u':
 				map.setField(playerX, playerY--, Field.CAN_GO_CHAR);
 				break;
 			case 'r':
 				map.setField(playerX++, playerY, Field.CAN_GO_CHAR);
 				break;
-			case 'b':
+			case 'd':
 				map.setField(playerX, playerY++, Field.CAN_GO_CHAR);
 				break;
 			case 'l':

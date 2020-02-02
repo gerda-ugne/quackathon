@@ -1,6 +1,8 @@
 package main.map;
 
-public class Field {
+import java.io.Serializable;
+
+public class Field implements Serializable {
 
     public static final char CAN_GO_CHAR = '.';
     public static final char OBSTACLE_CHAR = 'O';
