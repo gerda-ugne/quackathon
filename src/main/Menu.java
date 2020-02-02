@@ -1,3 +1,7 @@
+package main;
+
+import main.map.Field;
+
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -71,19 +75,23 @@ public class Menu
 					"~^~^~^`- ~^ ~^ '~^~^~^~"
 			);
 			
-			typeSlow("Hello. This is Snappy Ducks!" );
+			System.out.println("Hello. This is Snappy Ducks!" );
 			
-			typeSlow("\nOur hero, duck Beacky, after a long journey back to her pond,");
-			typeSlow("finds that the pollution problem is even worse than a year ago. ");
-			typeSlow("Snappy Beacky decides to fight back against the main cause of pollution - humans.");
+			typeSlowest("\nOur hero, duck Beacky, comes back to her home pond and meets");
+			typeSlowest("her old friend Quilly. They both notice that the problem of pollution");
+			typeSlowest("is even worse than the year before. Thus, they decide to fight back ");
+			typeSlowest("against the main cause of the pollution - humans. During their adventure");
+			typeSlowest("they not only punish the polluters by scaring them but also clean up");
+			typeSlowest("the pond from litter.");
 
-			typeSlow("\nThe game displays the pond map. Beacky is marked as number B on the map,");
-			typeSlow("and her friend Quilly as number Q. The obstacles are marked as ¥ and");
-			typeSlow("the human polluters, which ducks can fight, as ☻. Trash is marked as *");
+			typeSlowest("\nThe game displays the pond map. Beacky is marked as letter B on the map,");
+			typeSlowest("and her friend Quilly as letter Q. The obstacles are marked as ¥ and");
+			typeSlowest("the human polluters, which ducks can fight, as ☻. Trash is marked as *.");
+			typeSlowest("You start the game as Beacky.");
 
-			typeSlow("\n Would you like to... \n");
-			System.out.println("\n ... start a new game? Please enter number 1.");
-			System.out.println("\n ... load an old game? Please enter number 2.");
+			typeSlow("\nWould you like to... \n");
+			System.out.println(" ... start a new game? Please enter number 1.");
+			System.out.println(" ... load an old game? Please enter number 2.");
 					
             System.out.print("\nWhich number do you chose? Number = ");
 			
@@ -106,7 +114,7 @@ public class Menu
 						break;
 		
 					default:
-						System.out.print("\nSorry. This is not a valid choice. Please enter either '1' or '2'. ");
+						System.out.println("\nSorry. This is not a valid choice. Please enter either '1' or '2'. ");
 						notAValidChoice = true;
 					return;
 				}	
@@ -129,9 +137,9 @@ public class Menu
 	{
 		do
 		{
-			typeSlow("\n Main Menu:");
+			typeSlow("\nMain Menu:");
 			typeSlow("\t \n Would you like to... \n");
-            System.out.print("\n ... play the game? Please enter number 1.");
+            System.out.print(" ... play the game? Please enter number 1.");
 			
 			if (game.isPlayer1())
 			{
@@ -145,7 +153,7 @@ public class Menu
 			
 			System.out.print("\n ... get some help with the rules? Please enter number 3.");
 			System.out.print("\n ... exit the game? Please enter number 4. \n");
-			typeSlow("\n Which number do you choose? Number = ");
+			typeSlow("\nWhich number do you choose? Number = ");
 
 			Scanner s2 = new Scanner(System.in);
 			String decision = s2.nextLine();
@@ -158,13 +166,19 @@ public class Menu
 				decision = s2.nextLine();
 			}
 
+			int player1Counter = 0;
+			int player2Counter = 0;
+
+			int counterLimit = 2;
 			switch (decision) {
 
 				case "1":
 
 					typeSlow("\n Welcome back to the pond! \n ");
 					game.playGame(s2);
+
 					gameMenu();
+
 					break;
 
                 case "2":
@@ -182,13 +196,38 @@ public class Menu
                     break;
 
 				case "3": //help menu
-					typeSlow("\nThis is SNAPPYducks! These are the rules: xxx ");
+					typeSlow("\nThis is SNAPPYducks! These are the rules:");
+					typeSlow("You start the game as Beacky. \n");
+					typeSlow("You can move around by following the directions displayed on screen.");
+					typeSlow("The pond contains many obstacles, so make sure you don't lose your way.");
+					typeSlow("Unfortunately, there are many tourists who've come to visit your idyllic home pond.");
+					typeSlow("They happen to leave their litter everywhere. \n");
+					typeSlow("If you pick the litter up, you can find valuable resources to aid you.");
+					typeSlow("Since humans are disturbing your peace, you can fight them to support the ecosystem. \n");
+					typeSlow("You have limited resources to fight humans. You must keep an eye on your health bar and");
+					typeSlow("your energy at all times. Remember that wax helps your feathers, and that rocks are");
+					typeSlow("important to help your digestion. \n");
+					typeSlow("If a tourist overpowers you, you will lose your consciousness and float ");
+					typeSlow("to the shore.\n");
+					typeSlow("But it might also be interesting to discover the pond from Quilly's perspective.");
+					typeSlow("After some time, Beacky will need a rest, and Quilly can take over.\n");
+					typeSlow("That does not prevent you from switching the perspective whenever you want");
+					typeSlow("to in the main menu.\n");
+					typeSlow("Together you will be able to clear the pond of the litter and those who leave it.");
+					typeSlow("Save the ecosystem with Beacky and Quilly! \n");
+					typeSlow("Map legend:");
+					typeSlow(Field.CAN_GO_CHAR + " : Available pathway");
+					typeSlow(Field.OBSTACLE_CHAR + " : Obstacle marker");
+					typeSlow(Field.HUMAN_CHAR + " : Human marker");
+					typeSlow(Field.TRASH_CHAR + " : Litter marker");
+					typeSlow(Field.PLAYER_1_CHAR + " : Beacky's location");
+					typeSlow(Field.PLAYER_2_CHAR + " : Quilly's location");
 
 					break;
 
 				case "4":
 					end = true;
-					typeSlow("\n Thank you for playing SNAPPYducks. We hope you have enjoyed it. \n Goodybe. ");
+					typeSlow("\nThank you for playing SNAPPYducks. We hope you have enjoyed it. \nGoodybe. ");
 					System.out.println();
 					System.out.println();
 					System.exit(0);
@@ -207,8 +246,7 @@ public class Menu
 
 	/**
 	 * This method serves as the program's game menu. 
-	 * It lets the user choose between different options by selecting integer numbers form 1 to 6, calling other methods respectively.
-	It also calls the game menu after the user has started playing the game (and entered 'M' at the beginning of their turn for the first time).
+	 * It lets the user choose between different options by selecting integer numbers, calling other methods respectively.
 	There is also an option to take the user back to the main menu.
 	*/
 		
@@ -222,27 +260,29 @@ public class Menu
 			typeSlow(" Game Menu:");				
 			Scanner s2 = new Scanner(System.in);
 			System.out.print("\t \n Would you like to... \n"
-					+ "\n ... return to the game? Please enter number 1.");
+					+ "\n ... continue with the game? Please enter number 1.");
 
 			if (game.isPlayer1())
 			{
-				System.out.print("\n ... change to player 2? Please enter number 2.");
+				System.out.print("\n ... change to Quilly? Please enter number 2.");
 			}
 			else
 			{
-				System.out.print("\n ... change to player 1? Please enter number 2.");
+				System.out.print("\n ... change to Beacky? Please enter number 2.");
 			}
 
 			System.out.print("\n ... save? Please enter number 3.");
-			System.out.print("\n ... go to main menu? Please enter number 4.");
+			System.out.println("\n ... open your inventory? Please enter number 4.");
+			System.out.println(" ... go to main menu? Please enter number 5.");
+
 						
 		
 
 			String decision = s2.nextLine();
-				
-			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3") && !decision.equals("4") && !decision.equals("5") && !decision.equals("6"))
+
+			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3") && !decision.equals("4") && !(decision.equals("5")))
 			{
-				System.out.print("\nError. Please enter an integer between 1-6!");
+				System.out.print("\nError. Please enter an integer between 1-4!");
 				typeSlow("\nWhich number do you chose? Number = ");
 				decision = s2.nextLine();
 			}
@@ -259,27 +299,33 @@ public class Menu
                     if(game.isPlayer1())
                     {
                         game.setPlayer1(false);
-                        typeSlow("\nPlayer changed! Welcome back Beacky!");
+						game.setCountingSteps(0);
+                        typeSlow("Player changed! Welcome back Quilly!");
                     }
 
                     else
                     {
 						game.setPlayer1(true);
-						typeSlow("\nPlayer changed! Welcome back Quilly!");
+						game.setCountingSteps(0);
+						typeSlow("Player changed! Welcome back Quilly!");
                     }
                     break;
 
 				case "4":
-					return;
+					game.player.showInventory();
+					break;
 
 				case "3":
 					saveGame();
 					
 					break;
+
+				case "5":
+					return;
 					
 					
 				default:
-					System.out.print("\nError. Please enter an integer between 1-6!");
+					System.out.print("\nError. Please enter an integer between 1-5!");
 					typeSlow("\nWhich number do you chose? Number = "); //needs to be changed accordingly
 					String decision2 = s2.nextLine();
 					decision = decision2; 
@@ -428,11 +474,24 @@ public class Menu
         for (String aTxt : txt) 
         {
             System.out.print(aTxt);
-            sleepMe(60);
+            sleepMe(10);
         }
 
         System.out.println();
     }
+
+	public void typeSlowest(String text)
+	{
+		String[] txt = text.split("");
+
+		for (String aTxt : txt)
+		{
+			System.out.print(aTxt);
+			sleepMe(60);
+		}
+
+		System.out.println();
+	}
     
     public void sleepMe(int time) 
     {

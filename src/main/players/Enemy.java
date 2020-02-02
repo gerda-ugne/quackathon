@@ -102,6 +102,7 @@ public class Enemy implements Serializable {
 		System.out.println("Human has gained " + HPPoints + " health points.");
 
 		health = health + HPPoints;
+		if(health>100) health = 100;
 	}
 
 	/**
@@ -116,6 +117,7 @@ public class Enemy implements Serializable {
 		System.out.println("Human has gained " + MPPoints + " mana points.");
 
 		mana = mana + MPPoints;
+		if(mana>100) mana=100;
 	}
 
 

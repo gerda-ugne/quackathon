@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Inventory implements Serializable
 {
-    public static final String HP_POTION = "HP Potion";
-    public static final String MP_POTION = "MP Potion";
+    public static final String HP_POTION = "Nutrients";
+    public static final String MP_POTION = "Wax";
     private List<String> inventory;
     private int capacity;
 

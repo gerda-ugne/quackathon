@@ -22,7 +22,7 @@ public class Map implements Serializable {
 	public Map() {
 
 		map = new Field[MAP_SIZE][MAP_SIZE];
-		
+
 		//map is set to be empty when created
 		for(int i=0; i<map.length;i++)
 		{
@@ -40,7 +40,7 @@ public class Map implements Serializable {
 	 */
 	public void displayMap()
 	{
-		
+
 		//map.Map contents are printed
 		for(int i=0; i<map.length;i++)
 		{
@@ -48,12 +48,12 @@ public class Map implements Serializable {
 			{
 				System.out.print(map[i][j].getCharacter() + " ");
 			}
-			
+
 			System.out.println();
 		}
-		
+
 	}
-	
+
 	public void generateMap() {
 		Random rn = new Random();
 
@@ -112,7 +112,7 @@ public class Map implements Serializable {
 				left = map[x - 1][y];
 			} catch (IndexOutOfBoundsException ignore) {	}
 
-			if (up != null && (up.canMove() || up.getCharacter() == '1' || up.getCharacter() == '2')) {
+			if (up != null && (up.canMove() || up.getCharacter() == Field.PLAYER_1_CHAR || up.getCharacter() == Field.PLAYER_2_CHAR)) {
 				Field finalUp = up;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalUp))
@@ -123,7 +123,7 @@ public class Map implements Serializable {
 					newSet = Stream.concat(newSet.stream(), neighbor.stream()).collect(Collectors.toList());
 				}
 			}
-			if (right != null && (right.canMove() || right.getCharacter() == '1' || right.getCharacter() == '2')) {
+			if (right != null && (right.canMove() || right.getCharacter() == Field.PLAYER_1_CHAR || right.getCharacter() == Field.PLAYER_2_CHAR)) {
 				Field finalRight = right;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalRight))
@@ -134,7 +134,7 @@ public class Map implements Serializable {
 					newSet = Stream.concat(newSet.stream(), neighbor.stream()).collect(Collectors.toList());
 				}
 			}
-			if (down != null && (down.canMove() || down.getCharacter() == '1' || down.getCharacter() == '2')) {
+			if (down != null && (down.canMove() || down.getCharacter() == Field.PLAYER_1_CHAR || down.getCharacter() == Field.PLAYER_2_CHAR)) {
 				Field finalDown = down;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalDown))
@@ -145,7 +145,7 @@ public class Map implements Serializable {
 					newSet = Stream.concat(newSet.stream(), neighbor.stream()).collect(Collectors.toList());
 				}
 			}
-			if (left != null && (left.canMove() || left.getCharacter() == '1' || left.getCharacter() == '2')) {
+			if (left != null && (left.canMove() || left.getCharacter() == Field.PLAYER_1_CHAR || left.getCharacter() == Field.PLAYER_2_CHAR)) {
 				Field finalLeft = left;
 				List<Field> neighbor = unblocked.stream()
 						.filter(set -> set.contains(finalLeft))
@@ -158,6 +158,8 @@ public class Map implements Serializable {
 			}
 
 			unblocked.add(newSet);
+			displayMap();
+			System.out.println();
 			System.out.println();
 		}
 
@@ -184,7 +186,7 @@ public class Map implements Serializable {
 				enemyPositionX = rand.nextInt(MAP_SIZE);
 			} while (!(map[enemyPositionX][enemyPositionY].getCharacter() == Field.CAN_GO_CHAR));
 
-			map[enemyPositionX][enemyPositionY].setCharacter('☻');
+			map[enemyPositionX][enemyPositionY].setCharacter(Field.HUMAN_CHAR);
 		}
 	}
 

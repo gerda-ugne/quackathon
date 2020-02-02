@@ -1,3 +1,5 @@
+package main.map;
+
 import java.io.Serializable;
 
 public class Field implements Serializable {

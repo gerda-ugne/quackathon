@@ -21,7 +21,9 @@ public class Game implements Serializable {
 
 	private Map map;
 	private Enemy enemy;
-	private Player player;
+	public Player player;
+
+	private int countingSteps;
 
 	public Game() {
 		player1X = Map.MAP_SIZE - 1;
@@ -32,6 +34,8 @@ public class Game implements Serializable {
 		map = new Map();
 		enemy = new Enemy();
 		player = new Player();
+
+		int countingSteps = 0;
 
 		isPlayer1 = true;
 	}
@@ -53,7 +57,30 @@ public class Game implements Serializable {
 		this.isPlayer1 = player1;
 	}
 
+	/**
+	 *  Setter for countingSteps
+	 */
+	public void setCountingSteps(int steps)
+	{
+		this.countingSteps = steps;
+	}
+
 	public void playGame(Scanner in) {
+
+		if(countingSteps>= 15 && (isPlayer1 == true)) {
+			System.out.println("You've waddled so far! Why don't you rest for a bit?");
+					System.out.println("Quilly will take over in the meantime. Quack!");
+			isPlayer1 = false;
+			countingSteps = 0;
+		}
+
+		else if(countingSteps>= 15 && (isPlayer1 == false)) {
+			System.out.println("You've waddled so far! Why don't you rest for a bit?");
+			System.out.println("Beacky will take over in the meantime. Quack!");
+			isPlayer1 = true;
+			countingSteps = 0;
+		}
+
 		Random rnd = new Random();
 
 		int playerX = isPlayer1 ? player1X : player2X;
@@ -149,6 +176,9 @@ public class Game implements Serializable {
 	}
 
 	private void movePlayer(char direction) {
+
+		countingSteps++;
+
 		int playerX = isPlayer1 ? player1X : player2X;
 		int playerY = isPlayer1 ? player1Y : player2Y;
 		switch (direction) {
@@ -207,6 +237,11 @@ public class Game implements Serializable {
 
 			//Player has their turn first
 			StringBuilder recordedUserMoves = new StringBuilder();
+			System.out.println("\nYour status:");
+			System.out.println("Your health: " + player.getHealth());
+			System.out.println("Your mana: " + player.getMana());
+			System.out.println();
+
 			for (int i=0; i<2; i++)
 			{
 				do
@@ -246,7 +281,13 @@ public class Game implements Serializable {
 			if(!enemy.isEnemyAlive()) break;
 
 			//Enemy has their turn
-			System.out.println("\nHuman has their turn!");
+			System.out.println("\nHuman status:");
+			System.out.println("Human health: " + enemy.getEnemyHealth());
+			System.out.println("Human mana: " + enemy.getMana());;
+			System.out.println();
+
+			System.out.println("Human has their turn!");
+			System.out.println();
 			StringBuilder recordedEnemyMoves = new StringBuilder();
 
 			for (int i=0; i<2; i++)
@@ -279,7 +320,7 @@ public class Game implements Serializable {
 
 		if(!enemy.isEnemyAlive())
 		{
-			System.out.println("You have scared the polluter human and they have ran away! Good job.");
+			System.out.println("You have scared the polluter human and they have run away! Good job.");
 			return 1;
 
 
@@ -328,8 +369,10 @@ public class Game implements Serializable {
 				"     \\  ,_.-   )\n" +
 				"~^~^~^`- ~^ ~^ '~^~^~^~"
 		);
-		System.out.println("!!! CONGRATULATION !!!");
+		System.out.println("!!! CONGRATULATIONS !!!");
 		System.out.println("       You won!");
+		System.out.println("You have saved the pond from an ecological catastrophe.");
+		System.out.println("Long live the ecosystem!");
 		Menu.endGame();
 	}
 }

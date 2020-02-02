@@ -88,7 +88,7 @@ public class Player implements Serializable
 		{
 			int HPPoints = 40;
 
-			System.out.println("You had a crunchy worm with a rock. You feel restored!");
+			System.out.println("You had a worm with a crunchy rock. You feel restored!");
 			System.out.println("You have gained " + HPPoints + " health points.");
 
 			health = health + HPPoints;
