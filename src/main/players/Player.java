@@ -1,5 +1,3 @@
-package main.players;
-
 import java.util.Random;
 
 public class Player
@@ -76,10 +74,10 @@ public class Player
 	 */
 	public void healHP()
 	{
-		boolean isPotionReal = false;
-		isPotionReal = inv.remove("HP Potion");
+		boolean itemFound = false;
+		itemFound = inv.remove("HP Potion");
 
-		if(isPotionReal == true)
+		if(itemFound == true)
 		{
 			int HPPoints = 40;
 
@@ -102,11 +100,11 @@ public class Player
 	 */
 	public void healMP()
 	{
-		boolean isPotionReal = false;
-		isPotionReal = inv.remove("MP Potion");
+		boolean itemFound = false;
+		itemFound = inv.remove("MP Potion");
 
 
-		if(isPotionReal == true)
+		if(itemFound == true)
 		{
 			int MPPoints = 50;
 
