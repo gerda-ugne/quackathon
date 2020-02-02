@@ -1,5 +1,3 @@
-package main.players;
-
 import java.util.ArrayList;
 
 public class Inventory
@@ -20,14 +18,16 @@ public class Inventory
     public void addToInventory(String item) {
         if (inventory.size() < capacity) {
             inventory.add(item);
-        } else System.out.println("main.players.Inventory is full!");
+        } else System.out.println("Inventory is full!");
     }
 
     public void showInventory() {
-        System.out.println("\nmain.players.Inventory:");
+        System.out.println("Inventory:");
         for (String item : inventory) {
             System.out.println(item);
         }
+        
+        if(inventory.size() == 0) System.out.println("Your inventory is empty!");
     }
     
     /**
@@ -37,18 +37,18 @@ public class Inventory
      */
     public boolean remove(String itemName)
     {
-    	boolean noItemFound = true;
+    	boolean itemFound = false;
     	
         for (int i = 0;  i<inventory.size(); i++){
             String tempName = inventory.get(i);
             if(tempName.equals(itemName)){
                 inventory.remove(i);
-                noItemFound = false;
-                return false;
+                itemFound = true;
+                return true;
             }
         }
         
-        return true;
+        return false;
         
     }
 }
