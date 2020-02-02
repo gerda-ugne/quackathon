@@ -100,6 +100,10 @@ public class Menu
 			System.out.println("finds that the pollution problem is even worse than a year ago. ");
 			System.out.println("Snappy Beacky decides to fight back against the main cause of pollution – humans.");
 			
+			System.out.println("\nThe game displays the pond map. Beacky is marked as number 1 on the map,");
+			System.out.println("and her friend Quilly as number 2. The obstacles are marked as O and");
+			System.out.println("the human polluters, which ducks can fight, as H.");
+			
 			System.out.println("\n Would you like to... \n"
 					+ "\n ... start a new game? Please enter number 1."
 					+ "\n ... load an old game? Please enter number 2.");
