@@ -1,5 +1,3 @@
-package main.players;
-
 import java.util.Random;
 
 public class Enemy {
@@ -82,7 +80,7 @@ public class Enemy {
 		}
 		int damage = rand.nextInt(40);
 		System.out.println("Human has thrown a plastic bottle at you!");
-		System.out.println("Enemy has inflicted " + damage + " points of damage.");
+		System.out.println("Human has inflicted " + damage + " points of damage.");
 
 		mana = mana - 40;
 
