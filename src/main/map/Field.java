@@ -7,6 +7,7 @@ public class Field {
     public static final char PLAYER_1_CHAR = '1';
     public static final char PLAYER_2_CHAR = '2';
     public static final char HUMAN_CHAR = 'H';
+    public static final char TRASH_CHAR = '#';
 
     private int x;
     private int y;

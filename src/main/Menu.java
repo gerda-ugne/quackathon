@@ -96,9 +96,13 @@ public class Menu
 		if (count == 0)
 		{
 			
-			System.out.println("Hello. This is Hide&Seek&GetLostInAMaze!" );
+			System.out.println("Hello. This is Snappy Ducks!" );
 			
-			System.out.println("\t \n Would you like to... \n"
+			System.out.println("\nOur hero, duck Beacky, after a long journey back to her pond,");
+			System.out.println("finds that the pollution problem is even worse than a year ago. ");
+			System.out.println("Snappy Beacky decides to fight back against the main cause of pollution - humans.");
+
+			System.out.println("\n Would you like to... \n"
 					+ "\n ... start a new game? Please enter number 1."
 					+ "\n ... load an old game? Please enter number 2.");
 					
@@ -200,7 +204,7 @@ public class Menu
 
 				case "1":
 
-					System.out.print("\n Welcome back " + (game.isPlayer1() ? namePlayer1 : namePlayer2) + "!" + "\n");
+					System.out.println("\n Welcome back to the pond! \n ");
 					game.playGame(s2);
 					gameMenu();
 					break;
@@ -220,13 +224,13 @@ public class Menu
                     break;
 
 				case "3": //help menu
-					System.out.print("\nThis is Hide&Seek&GetLostInAMaze! These are the rules: xxx ");
+					System.out.print("\nThis is SNAPPYducks! These are the rules: xxx ");
 
 					break;
 
 				case "4":
 					end = true;
-					System.out.print("\n Thank you for playing Hide&Seek&GetLostInAMaze. We hope you have enjoyed it. \n Goodybe. ");
+					System.out.print("\n Thank you for playing SNAPPYducks. We hope you have enjoyed it. \n Goodybe. ");
 					System.out.println();
 					System.out.println();
 					System.exit(0);

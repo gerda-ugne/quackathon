@@ -88,6 +88,9 @@ public class Game implements Serializable {
 		}
 		movePlayer(direction);
 		map.displayMap();
+		System.out.println();
+		map.moveEnemies();
+		map.displayMap();
 	}
 
 	private char getDirection(Scanner in) {
@@ -141,9 +144,4 @@ public class Game implements Serializable {
 			player2Y = playerY;
 		}
 	}
-
-
-
-	// please make a fields "inputName" & "outputName" (String) & generate getters&setters
-
 }

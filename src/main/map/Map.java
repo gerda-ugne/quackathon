@@ -17,26 +17,13 @@ public class Map implements Serializable {
 //	}
 
 	private Field[][] map;
-	public final static int MAP_SIZE = 10;
+	public final static int MAP_SIZE = 15;
 
 	public Map() {
 
 		map = new Field[MAP_SIZE][MAP_SIZE];
 		
-//		map = new char[][]{
-//				{CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, PLAYER_2_CHAR },
-//				{CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR },
-//				{CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR },
-//				{CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR },
-//				{CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR},
-//				{OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR },
-//				{CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR },
-//				{CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR },
-//				{CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR },
-//				{PLAYER_1_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, CAN_GO_CHAR, OBSTACLE_CHAR, CAN_GO_CHAR, CAN_GO_CHAR },
-//		};
-		
-		//map.Map is set to be empty when created
+		//map is set to be empty when created
 		for(int i=0; i<map.length;i++)
 		{
 			for(int j=0; j<map[i].length;j++)
@@ -184,9 +171,9 @@ public class Map implements Serializable {
 	 * Places enemies on the map randomly.
 	 *
 	 */
-	public void addEnemies()
+	private void addEnemies()
 	{
-		int enemyCount = 3;
+		int enemyCount = calculateEnemyCount();
 
 		Random rand = new Random();
 		int enemyPositionX;
@@ -202,6 +189,63 @@ public class Map implements Serializable {
 
 			map[enemyPositionX][enemyPositionY].setCharacter('H');
 		}
+	}
+
+	private int calculateEnemyCount() {
+		int numberOfEmptyFields = 0;
+		for(int i=0; i<map.length;i++)
+		{
+			for(int j=0; j<map[i].length;j++)
+			{
+				if (map[i][j].getCharacter() == Field.CAN_GO_CHAR) {
+					numberOfEmptyFields++;
+				}
+			}
+		}
+		return (int) (numberOfEmptyFields * 0.15);
+	}
+
+	public void moveEnemies() {
+		Random rnd = new Random();
+		int enemyNumbers = 0;
+		for(int i=0; i<map.length;i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				Field moveTo = null;
+				if (map[i][j].getCharacter() == Field.HUMAN_CHAR) {
+					enemyNumbers++;
+				}
+			}
+		}
+		for(int i=0; i<map.length;i++)
+		{
+			for(int j=0; j<map[i].length;j++)
+			{
+				Field moveTo = null;
+				if (map[i][j].getCharacter() == Field.HUMAN_CHAR) {
+					try {
+						switch (rnd.nextInt(4)) {
+							case 0: // up
+								moveTo = map[i][j - 1];
+								break;
+							case 1: // right
+								moveTo = map[i + 1][j];
+								break;
+							case 2: // down
+								moveTo = map[i][i + 1];
+								break;
+							case 3: // left
+								moveTo = map[i - 1][j];
+								break;
+						}
+					} catch (IndexOutOfBoundsException ignored) { }
+					if (moveTo != null && moveTo.getCharacter() == Field.CAN_GO_CHAR) {
+						moveTo.setCharacter(Field.HUMAN_CHAR);
+						map[i][j].setCharacter(rnd.nextInt(20) == 1 ? Field.TRASH_CHAR : Field.CAN_GO_CHAR);
+					}
+				}
+			}
+		}
+		System.out.println("Enemies: " + enemyNumbers);
 	}
 
 	public char getField(int x, int y) throws IndexOutOfBoundsException {

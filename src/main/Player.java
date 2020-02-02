@@ -20,10 +20,9 @@ public class Player
 	 * Checks if the player is still alive
 	 * @return true/false depending on the state
 	 */
-	public boolean isPlayerAlive()
+	public boolean isAlive()
 	{
-		if(health > 0) return true;
-		else return false;
+		return health > 0;
 	}
 
     public void addToInventory(String item) {
