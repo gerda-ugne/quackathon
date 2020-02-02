@@ -224,6 +224,11 @@ public class Game implements Serializable {
 
 			//Player has their turn first
 			recordedUserMoves = "";
+			System.out.println("\nYour status:");
+			System.out.println("Your health: " + player.getHealth());
+			//System.out.println("Your mana: " + player.getMana());;
+			System.out.println();
+			
 			for (int i=0; i<2; i++)
 			{
 				do
@@ -263,7 +268,13 @@ public class Game implements Serializable {
 			if(enemy.isEnemyAlive() == false) break;
 
 			//Enemy has their turn
-			System.out.println("\nHuman has their turn!");
+			System.out.println("\n Human status:");
+			System.out.println("Human health: " + enemy.getEnemyHealth());
+			System.out.println("Human mana: " + enemy.getMana());;
+			System.out.println();
+			
+			System.out.println("Human has their turn!");
+			System.out.println();
 			recordedEnemyMoves = "";
 
 			for (int i=0; i<2; i++)
