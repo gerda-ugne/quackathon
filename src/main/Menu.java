@@ -12,9 +12,7 @@ import java.util.Scanner;
 public class Menu 
 {
 	private Game game;
-	
-	private String namePlayer1;
-	private String namePlayer2;
+
 	private String gameName;
 	//private String name;
 	private int count;
@@ -28,11 +26,8 @@ public class Menu
 	public Menu()
 	{
 		game = new Game();
-		
-		namePlayer1 = "";
-		namePlayer2 = "";
 		gameName = "";
-		//name = "";
+
 		count = 0;
 		end = false;
       
@@ -51,31 +46,6 @@ public class Menu
 		menu1.welcome();
 		menu1.mainMenu();
 	}
-	
-	
-	public String getNamePlayer1() 
-	{
-		return namePlayer1;
-	}
-
-
-	public void setNamePlayer1(String namePlayer1) 
-	{
-		this.namePlayer1 = namePlayer1;
-	}
-
-
-	public String getNamePlayer2() 
-	{
-		return namePlayer2;
-	}
-
-
-	public void setNamePlayer2(String namePlayer2) 
-	{
-		this.namePlayer2 = namePlayer2;
-	}
-
 
 	public String getGameName() {
 		return gameName;
@@ -95,6 +65,13 @@ public class Menu
 	{
 		if (count == 0)
 		{
+			System.out.println(
+					"            ,-.\n" +
+					"    ,      ( {o\\\n" +
+					"    {`\"=,___) (`~\n" +
+					"     \\  ,_.-   )\n" +
+					"~^~^~^`- ~^ ~^ '~^~^~^~"
+			);
 			
 			System.out.println("Hello. This is Snappy Ducks!" );
 			
@@ -127,7 +104,7 @@ public class Menu
 						//break;
 		
 					case "2":	
-						selectGame();
+						loadGame();
 						break;
 		
 					default:
@@ -144,28 +121,7 @@ public class Menu
 			System.out.print("\nIs there anything else you would like to do? \n" );
 		}
 	}
-	
-	public void selectGame()
-	{
-			
-			boolean notAValidName = false;
 
-			loadGame();
-
-			System.out.println("\nThanks. ");
-		
-			if(game.isPlayer1())
-			{
-				System.out.print("\n" + "Hello " + namePlayer1 + "!");
-			}
-			
-			else
-			{
-				System.out.print("\n" + "Hello " + namePlayer2 + "!");
-			}
-			
-			System.out.println();
-	}
 
 	/**
 	
@@ -268,10 +224,19 @@ public class Menu
 			System.out.print(" Game Menu:");				
 			Scanner s2 = new Scanner(System.in);
 			System.out.print("\t \n Would you like to... \n"
-					+ "\n ... return to the game? Please enter number 1."
-					+ "\n ... display your current score? Please enter number 2."
-					+ "\n ... save? Please enter number 3."
-					+ "\n ... go to main menu? Please enter number 4.");
+					+ "\n ... return to the game? Please enter number 1.");
+
+			if (game.isPlayer1())
+			{
+				System.out.print("\n ... change to player 2? Please enter number 2.");
+			}
+			else
+			{
+				System.out.print("\n ... change to player 1? Please enter number 2.");
+			}
+
+			System.out.print("\n ... save? Please enter number 3.");
+			System.out.print("\n ... go to main menu? Please enter number 4.");
 						
 		
 
@@ -291,6 +256,20 @@ public class Menu
 					game.playGame(s2);
 
 					break;
+				case "2":
+
+                    if(game.isPlayer1())
+                    {
+                        game.setPlayer1(false);
+	                    System.out.println("\nPlayer changed! Welcome back Beacky!");
+                    }
+
+                    else
+                    {
+						game.setPlayer1(true);
+	                    System.out.println("\nPlayer changed! Welcome back Quilly!");
+                    }
+                    break;
 
 				case "4":
 					return;
@@ -332,14 +311,8 @@ public class Menu
 
 			System.out.println();
 
-			//prints the grid with the compuer's fleet (the one that the user can't see!)
-
-			//  printWriter.print(isPlayer1);
 			objectWriter.writeObject(game);
 		}
-
-		// print other stuff: inventory, score, etc
-
 
 		catch (IOException e)
 		{
@@ -359,14 +332,8 @@ public class Menu
 		}
 	}
 
-	private void setInputName(String nextLine) {
-
-	}
-
-
 	public void loadGame()
 	{
-		//boolean player1or2 = false;
 		boolean fileExists = true;
 		int tryThreeTimes = 0;
 
@@ -450,6 +417,10 @@ public class Menu
 		}
 
 		return yepOrNope;
+	}
+
+	public static void endGame() {
+		System.exit(1);
 	}
 }
 		

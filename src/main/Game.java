@@ -113,6 +113,7 @@ public class Game implements Serializable {
 			System.out.println("You cannot go into that direction.");
 		}
 		movePlayer(direction);
+		checkForVictory();
 		map.moveEnemies();
 		map.displayMap();
 	}
@@ -267,35 +268,53 @@ public class Game implements Serializable {
 		} while(enemy.isEnemyAlive() && player.isPlayerAlive());
 
 
-	if(!enemy.isEnemyAlive())
-	{
-		System.out.println("You have scared the polluter human and they have ran away! Good job.");
-		return true;
-
-
-
-	}
-	else if(!player.isPlayerAlive())
-	{
-		System.out.println("The polluter has drowned you in trash and you have lost all your items. You must retreat for now.");
-		if(isPlayer1)
+		if(!enemy.isEnemyAlive())
 		{
-			player1Y = 0;
-			player1X = Map.MAP_SIZE - 1;
+			System.out.println("You have scared the polluter human and they have ran away! Good job.");
+			return true;
+
+
+
 		}
-		else
+		else if(!player.isPlayerAlive())
 		{
-			player2Y = Map.MAP_SIZE - 1;
-			player2X = 0;
+			System.out.println("The polluter has drowned you in trash. As you awaken, you discover snacks in your inventory. You must retreat for now.");
+			if(isPlayer1)
+			{
+				player1Y = 0;
+				player1X = Map.MAP_SIZE - 1;
+			}
+			else
+			{
+				player2Y = Map.MAP_SIZE - 1;
+				player2X = 0;
+			}
+
+			player.getInv().resetInventory();
+			return false;
 		}
 
 		return false;
+
+	  }
+
+	private void checkForVictory() {
+		for (int i = 0; i < Map.MAP_SIZE; i++) {
+			for (int j = 0; i < Map.MAP_SIZE; j++) {
+				if (map.getField(i, j) == Field.TRASH_CHAR || map.getField(i, j) == Field.HUMAN_CHAR) {
+					return;
+				}
+			}
+		}
+		System.out.println(
+				"            ,-.\n" +
+				"    ,      ( {o\\\n" +
+				"    {`\"=,___) (`~\n" +
+				"     \\  ,_.-   )\n" +
+				"~^~^~^`- ~^ ~^ '~^~^~^~"
+		);
+		System.out.println("!!! CONGRATULATION !!!");
+		System.out.println("       You won!");
+		Menu.endGame();
 	}
-
-	return false;
-
-  }
-
-	// please make a fields "inputName" & "outputName" (String) & generate getters&setters
-
 }

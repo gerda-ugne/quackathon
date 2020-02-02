@@ -8,7 +8,7 @@ public class Player implements Serializable
 	private int health;
 	private int mana;
 
-	Inventory inv = new Inventory();
+	private Inventory inv = new Inventory();
 
 	public Player(){
 
@@ -30,7 +30,11 @@ public class Player implements Serializable
         inv.addToInventory(item);
     }
 
-    public void showInventory() {
+	public Inventory getInv() {
+		return inv;
+	}
+
+	public void showInventory() {
         inv.showInventory();
     }
 

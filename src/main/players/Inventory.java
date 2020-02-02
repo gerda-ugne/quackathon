@@ -55,4 +55,12 @@ public class Inventory implements Serializable
         return false;
         
     }
+
+    /**
+     *Resets the inventory
+     */
+    public void resetInventory()
+    {
+        this.inventory = new ArrayList<>();
+    }
 }
