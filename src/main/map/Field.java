@@ -1,15 +1,13 @@
-package main.map;
-
 import java.io.Serializable;
 
 public class Field implements Serializable {
 
-    public static final char CAN_GO_CHAR = '.';
-    public static final char OBSTACLE_CHAR = 'O';
-    public static final char PLAYER_1_CHAR = '1';
-    public static final char PLAYER_2_CHAR = '2';
-    public static final char HUMAN_CHAR = 'H';
-    public static final char TRASH_CHAR = '#';
+    public static final char CAN_GO_CHAR = '░';
+    public static final char OBSTACLE_CHAR = '¥';
+    public static final char PLAYER_1_CHAR = 'B';
+    public static final char PLAYER_2_CHAR = 'Q';
+    public static final char HUMAN_CHAR = '☻';
+    public static final char TRASH_CHAR = '*';
 
     private int x;
     private int y;

@@ -16,6 +16,8 @@ public class Menu
 	private int count;
 	private boolean end;
 	//boolean player1;
+	
+	Inventory inv = new Inventory();
     
 	
 	/**  
@@ -43,7 +45,20 @@ public class Menu
 		
 		menu1.welcome();
 		menu1.mainMenu();
+		//menu1.test();
 	}
+	
+	
+	public void test()
+	{
+		inv.showInventory();
+		inv.remove("HP Potion");
+		inv.showInventory();
+		
+		inv.remove("MP Potion");
+		inv.showInventory();
+	}
+
 
 	public String getGameName() {
 		return gameName;
@@ -63,37 +78,32 @@ public class Menu
 	{
 		if (count == 0)
 		{
-			System.out.println(
-					"            ,-.\n" +
-					"    ,      ( {o\\\n" +
-					"    {`\"=,___) (`~\n" +
-					"     \\  ,_.-   )\n" +
-					"~^~^~^`- ~^ ~^ '~^~^~^~"
-			);
 			
-			typeSlow("Hello. This is Snappy Ducks!" );
+			System.out.println("Hello. This is Snappy Ducks!" );
 			
-			typeSlow("\nOur hero, duck Beacky, after a long journey back to her pond,");
-			typeSlow("finds that the pollution problem is even worse than a year ago. ");
-			typeSlow("Snappy Beacky decides to fight back against the main cause of pollution - humans.");
+			System.out.println("\nOur hero, duck Beacky, after a long journey back to her pond,");
+			System.out.println("finds that the pollution problem is even worse than a year ago. ");
+			System.out.println("Snappy Beacky decides to fight back against the main cause of pollution - humans.");
 
-			typeSlow("\nThe game displays the pond map. Beacky is marked as number B on the map,");
-			typeSlow("and her friend Quilly as number Q. The obstacles are marked as ¥ and");
-			typeSlow("the human polluters, which ducks can fight, as ☻. Trash is marked as *");
+			System.out.println("\nThe game displays the pond map. Beacky is marked as number 1 on the map,");
+			System.out.println("and her friend Quilly as number 2. The obstacles are marked as O and");
+			System.out.println("the human polluters, which ducks can fight, as H.");
 
-			typeSlow("\n Would you like to... \n");
-			System.out.println("\n ... start a new game? Please enter number 1.");
-			System.out.println("\n ... load an old game? Please enter number 2.");
+			System.out.println("\n Would you like to... \n"
+					+ "\n ... start a new game? Please enter number 1."
+					+ "\n ... load an old game? Please enter number 2.");
 					
             System.out.print("\nWhich number do you chose? Number = ");
 			
+            
+            boolean notAValidChoice = false;
+            
+            do
+			{
+            	
 			Scanner s1 = new Scanner(System.in);
 			String choice = s1.nextLine();
 			
-			boolean notAValidChoice = false;
-			
-			do
-			{
 			
 				switch(choice)
 				{
@@ -106,9 +116,9 @@ public class Menu
 						break;
 		
 					default:
-						System.out.print("\nSorry. This is not a valid choice. Please enter either '1' or '2'. ");
+						System.out.println("\nSorry. This is not a valid choice. Please enter either '1' or '2'. ");
 						notAValidChoice = true;
-					return;
+					//return;
 				}	
 			}
 			while(notAValidChoice);
@@ -116,10 +126,10 @@ public class Menu
 		
 		else 
 		{
-			typeSlow("\nIs there anything else you would like to do? \n" );
+			System.out.print("\nIs there anything else you would like to do? \n" );
 		}
 	}
-
+	
 
 	/**
 	
@@ -127,10 +137,11 @@ public class Menu
 
 	public void mainMenu()
 	{
+		
 		do
 		{
-			typeSlow("\n Main Menu:");
-			typeSlow("\t \n Would you like to... \n");
+			System.out.print("\n Main Menu:");
+			System.out.print("\t \n Would you like to... \n");
             System.out.print("\n ... play the game? Please enter number 1.");
 			
 			if (game.isPlayer1())
@@ -144,8 +155,8 @@ public class Menu
 
 			
 			System.out.print("\n ... get some help with the rules? Please enter number 3.");
-			System.out.print("\n ... exit the game? Please enter number 4. \n");
-			typeSlow("\n Which number do you choose? Number = ");
+			System.out.print("\n ... exit the game? Please enter number 4. \n"
+					+ "\n Which number do you choose? Number = ");
 
 			Scanner s2 = new Scanner(System.in);
 			String decision = s2.nextLine();
@@ -153,18 +164,24 @@ public class Menu
 			
 			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3") && !decision.equals("4"))
 			{
-				System.out.print("\nError. Please enter an integer between 1-4!");
-				typeSlow("\n" + "\nWhich number do you chose? Number = ");
+				System.out.print("\nError. Please enter an integer between 1-4!"
+				+ "\n" + "\nWhich number do you chose? Number = ");
 				decision = s2.nextLine();
 			}
-
+			
+			int player1Counter = 0;
+			int player2Counter = 0;
+			
+			int counterLimit = 2;
 			switch (decision) {
 
 				case "1":
 
-					typeSlow("\n Welcome back to the pond! \n ");
+					System.out.println("\n Welcome back to the pond! \n ");
 					game.playGame(s2);
+                    
 					gameMenu();
+					
 					break;
 
                 case "2":
@@ -182,21 +199,21 @@ public class Menu
                     break;
 
 				case "3": //help menu
-					typeSlow("\nThis is SNAPPYducks! These are the rules: xxx ");
+					System.out.print("\nThis is SNAPPYducks! These are the rules: xxx ");
 
 					break;
 
 				case "4":
 					end = true;
-					typeSlow("\n Thank you for playing SNAPPYducks. We hope you have enjoyed it. \n Goodybe. ");
+					System.out.print("\n Thank you for playing SNAPPYducks. We hope you have enjoyed it. \n Goodybe. ");
 					System.out.println();
 					System.out.println();
 					System.exit(0);
 					break;
 
 				default:
-					System.out.print("\nError. Please enter an integer between 1-3!");
-					typeSlow("\n" + "\nWhich number do you chose? Number = ");
+					System.out.print("\nError. Please enter an integer between 1-3!"
+							+ "\n" + "\nWhich number do you chose? Number = ");
 					decision = s2.nextLine();
 
 			}
@@ -219,31 +236,31 @@ public class Menu
 		do
 		{
 			System.out.print("\n");
-			typeSlow(" Game Menu:");				
+			System.out.print(" Game Menu:");				
 			Scanner s2 = new Scanner(System.in);
 			System.out.print("\t \n Would you like to... \n"
-					+ "\n ... return to the game? Please enter number 1.");
-
+					+ "\n ... continue with the game? Please enter number 1.");
+			
 			if (game.isPlayer1())
 			{
-				System.out.print("\n ... change to player 2? Please enter number 2.");
+				System.out.print("\n ... change to Quilly? Please enter number 2.");
 			}
 			else
 			{
-				System.out.print("\n ... change to player 1? Please enter number 2.");
+				System.out.print("\n ... change to Beacky? Please enter number 2.");
 			}
 
 			System.out.print("\n ... save? Please enter number 3.");
-			System.out.print("\n ... go to main menu? Please enter number 4.");
+			System.out.println("\n ... go to main menu? Please enter number 4.");
 						
 		
 
 			String decision = s2.nextLine();
-				
-			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3") && !decision.equals("4") && !decision.equals("5") && !decision.equals("6"))
+	
+			while(!decision.equals("1") && !decision.equals("2") && !decision.equals("3") && !decision.equals("4"))
 			{
-				System.out.print("\nError. Please enter an integer between 1-6!");
-				typeSlow("\nWhich number do you chose? Number = ");
+				System.out.print("\nError. Please enter an integer between 1-4!"
+						+ "\n" + "\nWhich number do you chose? Number = ");
 				decision = s2.nextLine();
 			}
 				
@@ -255,17 +272,19 @@ public class Menu
 
 					break;
 				case "2":
-
+					
                     if(game.isPlayer1())
                     {
                         game.setPlayer1(false);
-                        typeSlow("\nPlayer changed! Welcome back Beacky!");
+                        game.setCountingSteps(0);
+	                    System.out.println("Player changed! Welcome back Quilly!");
                     }
-
+			
                     else
                     {
 						game.setPlayer1(true);
-						typeSlow("\nPlayer changed! Welcome back Quilly!");
+						game.setCountingSteps(0);
+	                    System.out.println("\nPlayer changed! Welcome back Beacky!");
                     }
                     break;
 
@@ -279,8 +298,8 @@ public class Menu
 					
 					
 				default:
-					System.out.print("\nError. Please enter an integer between 1-6!");
-					typeSlow("\nWhich number do you chose? Number = "); //needs to be changed accordingly
+					System.out.print("\nError. Please enter an integer between 1-6!"
+							+ "\n" + "\nWhich number do you chose? Number = "); //needs to be changed accordingly
 					String decision2 = s2.nextLine();
 					decision = decision2; 
 					
@@ -312,6 +331,8 @@ public class Menu
 			objectWriter.writeObject(game);
 		}
 
+
+
 		catch (IOException e)
 		{
 			System.out.println("Error in file write: " + e + "!");
@@ -330,6 +351,8 @@ public class Menu
 		}
 	}
 
+
+
 	public void loadGame()
 	{
 		boolean fileExists = true;
@@ -338,8 +361,13 @@ public class Menu
 		FileInputStream fileReader = null;
 		ObjectInputStream inputStream = null;
 		String nextLine;
+		
+		boolean invalidChoice = false;
 
-
+		do
+		{
+			
+		
 		try
 		{
 			Scanner s2 = new Scanner(System.in);
@@ -380,7 +408,9 @@ public class Menu
 		catch (IOException | ClassNotFoundException e)
 		{
 			System.out.println("Sorry, an error occurred."+ " \n");
+			
 		}
+		
 
 		finally
 		{
@@ -400,6 +430,9 @@ public class Menu
 				System.out.println("Sorry, an error occurred.");
 			}
 		}
+		
+		}
+		while(invalidChoice == true);
 	}
 
 	public boolean checkIfFileExists (String fileName)
@@ -416,33 +449,11 @@ public class Menu
 
 		return yepOrNope;
 	}
-
-	public static void endGame() {
-		System.exit(1);
-	}
-	
-    public void typeSlow(String text)
-    {
-        String[] txt = text.split("");
-        
-        for (String aTxt : txt) 
-        {
-            System.out.print(aTxt);
-            sleepMe(60);
-        }
-
-        System.out.println();
-    }
-    
-    public void sleepMe(int time) 
-    {
-        try 
-        {
-            Thread.sleep(time);
-        } 
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-    }
 }
+		
+		
+		
+		
+	
+
+ 
