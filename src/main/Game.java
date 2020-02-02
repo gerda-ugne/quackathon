@@ -135,7 +135,7 @@ public class Game implements Serializable {
 						break;
 					case Field.TRASH_CHAR:
 						valid = true;
-						player.addToInventory(rnd.nextInt(2) == 0 ? Inventory.MP_POTION : Inventory.HP_POTION);
+						player.addToInventory(rnd.nextInt(2) == 0 ? Inventory.WAX : Inventory.NUTRIENTS);
 
 						System.out.println("You've just picked up some trash and got a power up!");
 						player.showInventory();

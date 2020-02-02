@@ -493,7 +493,7 @@ public class Menu
 		for (String aTxt : txt)
 		{
 			System.out.print(aTxt);
-			sleepMe(50);
+			sleepMe(20);
 		}
 
 		System.out.println();

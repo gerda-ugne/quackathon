@@ -82,7 +82,7 @@ public class Player implements Serializable
 	public void healHP()
 	{
 		boolean itemFound = false;
-		itemFound = inv.remove("HP Potion");
+		itemFound = inv.remove(Inventory.NUTRIENTS);
 
 		if(itemFound == true)
 		{
@@ -108,7 +108,7 @@ public class Player implements Serializable
 	public void healMP()
 	{
 		boolean itemFound = false;
-		itemFound = inv.remove("MP Potion");
+		itemFound = inv.remove(Inventory.WAX);
 
 
 		if(itemFound == true)
