@@ -3,9 +3,11 @@ package main;
 import main.map.Field;
 import main.map.Map;
 import main.players.Enemy;
+import main.players.Inventory;
 import main.players.Player;
 
 import java.io.*;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game implements Serializable {
@@ -52,6 +54,8 @@ public class Game implements Serializable {
 	}
 
 	public void playGame(Scanner in) {
+		Random rnd = new Random();
+
 		int playerX = isPlayer1 ? player1X : player2X;
 		int playerY = isPlayer1 ? player1Y : player2Y;
 		char direction = ' ';
@@ -59,86 +63,53 @@ public class Game implements Serializable {
 		boolean fightWon = true;
 
 		while (!valid) {
+			direction = getDirection(in);
+			int destinationX;
+			int destinationY;
+
 			try {
-				direction = getDirection(in);
 				switch (direction) {
 					case 't':
-						if (map.getField(playerX, playerY - 1) == Field.CAN_GO_CHAR) {
-							valid = true;
-							continue;
-						}
-						else if(map.getField(playerX, playerY-1) == Field.HUMAN_CHAR)
-						{
-							fightWon = combat();
-							if(fightWon == true)
-							{
-								map.setField(playerX, playerY-1, Field.CAN_GO_CHAR);
-								valid = true;
-								continue;
-							}
-
-						}
-						else {
-							break;
-						}
+						destinationX = playerX;
+						destinationY = playerY - 1;
+						break;
 					case 'r':
-						if (map.getField(playerX + 1, playerY) == Field.CAN_GO_CHAR) {
-							valid = true;
-							continue;
-						}
-						else if(map.getField(playerX + 1, playerY) == Field.HUMAN_CHAR)
-						{
-							fightWon = combat();
-							if(fightWon == true)
-							{
-								map.setField(playerX + 1, playerY, Field.CAN_GO_CHAR);
-								valid = true;
-								continue;
-							}
-						}
-						else {
-							break;
-						}
+						destinationX = playerX + 1;
+						destinationY = playerY;
+						break;
 					case 'b':
-						if (map.getField(playerX, playerY + 1) == Field.CAN_GO_CHAR) {
-							valid = true;
-							continue;
-						}
-						else if(map.getField(playerX, playerY + 1) == Field.HUMAN_CHAR)
-						{
-							fightWon = combat();
-							if(fightWon == true)
-							{
-								map.setField(playerX, playerY+1, Field.CAN_GO_CHAR);
-								valid = true;
-								continue;
-							}
-						}
-						else {
-							break;
-						}
+						destinationX = playerX;
+						destinationY = playerY + 1;
+						break;
 					case 'l':
-						if (map.getField(playerX - 1, playerY) == Field.CAN_GO_CHAR) {
+						destinationX = playerX - 1;
+						destinationY = playerY;
+						break;
+					default:
+						throw new IllegalStateException("Unexpected value: " + direction);
+				}
+
+				switch (map.getField(destinationX, destinationY)) {
+					case Field.CAN_GO_CHAR:
+						valid = true;
+						continue;
+					case Field.HUMAN_CHAR:
+						fightWon = combat();
+						if(fightWon)
+						{
+							map.setField(playerX-1, playerY, Field.CAN_GO_CHAR);
 							valid = true;
 							continue;
 						}
-						else if(map.getField(playerX - 1, playerY) == Field.HUMAN_CHAR)
-						{
-							fightWon = combat();
-							if(fightWon == true)
-							{
-								map.setField(playerX-1, playerY, Field.CAN_GO_CHAR);
-								valid = true;
-								continue;
-							}
-						}
-						else {
-							break;
-						}
+					case Field.TRASH_CHAR:
+						valid = true;
+						player.addToInventory(rnd.nextInt(2) == 0 ? Inventory.MP_POTION : Inventory.HP_POTION);
+						player.showInventory();
+						valid = true;
+						continue;
 				}
-			} catch (IndexOutOfBoundsException ignore) {
+			} catch (IndexOutOfBoundsException | IllegalStateException ignore) { }
 
-			}
 			System.out.println("You cannot go into that direction.");
 		}
 		movePlayer(direction);

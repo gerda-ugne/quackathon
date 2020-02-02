@@ -1,18 +1,23 @@
+package main.players;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory
 {
-    private ArrayList<String> inventory;
+    public static final String HP_POTION = "HP Potion";
+    public static final String MP_POTION = "MP Potion";
+    private List<String> inventory;
     private int capacity;
 
     public Inventory() {
         capacity = 10;
-        this.inventory = new ArrayList<String>();
+        this.inventory = new ArrayList<>();
         
-        inventory.add("HP Potion");
-        inventory.add("HP Potion");
-        inventory.add("MP Potion");
-        inventory.add("MP Potion");
+        inventory.add(HP_POTION);
+        inventory.add(HP_POTION);
+        inventory.add(MP_POTION);
+        inventory.add(MP_POTION);
     }
 
     public void addToInventory(String item) {
@@ -37,13 +42,11 @@ public class Inventory
      */
     public boolean remove(String itemName)
     {
-    	boolean itemFound = false;
-    	
+
         for (int i = 0;  i<inventory.size(); i++){
             String tempName = inventory.get(i);
             if(tempName.equals(itemName)){
                 inventory.remove(i);
-                itemFound = true;
                 return true;
             }
         }
