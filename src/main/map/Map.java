@@ -187,7 +187,7 @@ public class Map implements Serializable {
 				enemyPositionX = rand.nextInt(MAP_SIZE);
 			} while (!(map[enemyPositionX][enemyPositionY].getCharacter() == Field.CAN_GO_CHAR));
 
-			map[enemyPositionX][enemyPositionY].setCharacter('H');
+			map[enemyPositionX][enemyPositionY].setCharacter('☻');
 		}
 	}
 
