@@ -268,7 +268,7 @@ public class Game implements Serializable {
 			if(enemy.isEnemyAlive() == false) break;
 
 			//Enemy has their turn
-			System.out.println("\n Human status:");
+			System.out.println("\nHuman status:");
 			System.out.println("Human health: " + enemy.getEnemyHealth());
 			System.out.println("Human mana: " + enemy.getMana());;
 			System.out.println();
