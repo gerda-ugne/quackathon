@@ -149,11 +149,11 @@ public class Menu
 			
 			if (game.isPlayer1())
 			{
-				System.out.print("\n ... change to player 2? Please enter number 2.");
+				System.out.print("\n ... change to Quilly? Please enter number 2.");
 			}
 			else
 			{
-				System.out.print("\n ... change to player 1? Please enter number 2.");
+				System.out.print("\n ... change to Beacky? Please enter number 2.");
 			}
 
 			
