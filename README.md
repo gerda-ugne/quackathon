@@ -2,6 +2,9 @@
 
 We tackled the ChilliConnect challenge for the 2020 Quackathon event, which took event in University of Dundee on February 1-2 2020. After 24 hours of no sleep and hard work, we are proud to announce that the project won!
 
+### Challenge Summary
+Create a game with textual interface and that uses asynchronous/passive model of gameplay.
+
 ## Snappy Ducks
 
 ### Backstory of the game:
